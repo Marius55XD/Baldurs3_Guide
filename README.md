@@ -66,12 +66,6 @@ admin: full access | editor: create/edit guides & categories | user: browse only
 
 Admin account: admin@bg3guide.com / password
 
-Promote via Tinker:
-`bash
-php artisan tinker
-# App\Models\User::where('email','you@example.com')->update(['role'=>'editor']);
-`
-
 ---
 
 ## Technologies
