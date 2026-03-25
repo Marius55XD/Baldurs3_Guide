@@ -174,7 +174,7 @@
                 </ul>
                 <form class="d-flex me-3" action="{{ route('guides.index') }}" method="GET">
                     <input class="form-control form-control-sm me-2" type="search" name="search"
-                           placeholder="Search guides…" value="{{ request('search') }}">
+                           placeholder="Search guides..." value="{{ request('search') }}">
                     <button class="btn btn-gold btn-sm" type="submit"><i class="bi bi-search"></i></button>
                 </form>
                 <ul class="navbar-nav">
