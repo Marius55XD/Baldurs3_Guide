@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -23,6 +24,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+});
 
 // ── Admin ─────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
