@@ -30,11 +30,31 @@
         <div class="col-lg-9">
             <h2 class="fw-bold mb-4">Welcome, <span class="text-gold">{{ $user->name }}</span></h2>
 
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <section class="bg3-card p-4 p-md-5 mb-4">
                 <div class="text-center mb-4">
                     <div class="profile-avatar mx-auto mb-3">
-                        <i class="bi bi-person-circle"></i>
+                        @if($user->avatar)
+                            <img src="{{ asset($user->avatar) }}" alt="{{ $user->name }} avatar" class="profile-avatar-img">
+                        @else
+                            <i class="bi bi-person-circle"></i>
+                        @endif
                     </div>
+
+                    <form action="{{ route('profile.avatar.update') }}" method="POST" enctype="multipart/form-data" class="d-inline-flex flex-column align-items-center gap-2">
+                        @csrf
+                        <input type="file" name="avatar" class="form-control form-control-sm" style="max-width: 270px;" accept=".jpg,.jpeg,.png,.webp" required>
+                        <button type="submit" class="btn btn-outline-gold btn-sm">Upload Avatar</button>
+                    </form>
                 </div>
 
                 <div class="row gy-3 profile-detail-grid">
@@ -52,8 +72,50 @@
                 </div>
 
                 <div id="settings" class="mt-4 text-center">
-                    <a href="#" class="text-decoration-none text-gold profile-link-muted">Forgot Password?</a>
+                    <span class="text-decoration-none text-gold profile-link-muted">Settings</span>
                 </div>
+            </section>
+
+            <section class="bg3-card p-4 p-md-5 mb-4">
+                <h4 class="text-gold mb-3"><i class="bi bi-person-gear me-2"></i>Edit Profile</h4>
+                <form action="{{ route('profile.update') }}" method="POST" class="row g-3">
+                    @csrf
+                    @method('PATCH')
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" name="email" type="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-gold">Save Profile</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="bg3-card p-4 p-md-5 mb-4">
+                <h4 class="text-gold mb-3"><i class="bi bi-shield-lock me-2"></i>Change Password</h4>
+                <form action="{{ route('profile.password.update') }}" method="POST" class="row g-3">
+                    @csrf
+                    @method('PATCH')
+                    <div class="col-md-4">
+                        <label for="current_password" class="form-label">Current Password</label>
+                        <input id="current_password" name="current_password" type="password" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password" class="form-label">New Password</label>
+                        <input id="password" name="password" type="password" class="form-control" minlength="8" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" minlength="8" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-gold">Update Password</button>
+                    </div>
+                </form>
             </section>
 
             <section>
@@ -134,6 +196,13 @@
         font-size: 2.4rem;
         color: var(--bg3-gold);
         background: rgba(103, 232, 249, .07);
+        overflow: hidden;
+    }
+
+    .profile-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .profile-detail-grid {
