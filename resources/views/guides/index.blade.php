@@ -11,7 +11,7 @@
                 <form action="{{ route('guides.index') }}" method="GET">
                     <div class="mb-3">
                         <input type="text" name="search" class="form-control form-control-sm"
-                               placeholder="Searchâ€¦" value="{{ request('search') }}">
+                               placeholder="Search..." value="{{ request('search') }}">
                     </div>
                     <div class="mb-3">
                         <select name="category" class="form-select form-select-sm">
@@ -77,9 +77,9 @@
                         <p class="mb-2 small" style="color:#d8ebff;">{{ $guide->excerpt }}</p>
                         <small style="color:#d8ebff;">
                             <i class="bi bi-person me-1"></i>{{ $guide->author->name }}
-                            <span class="mx-2">Â·</span>
+                            <span class="mx-2">&middot;</span>
                             <i class="bi bi-calendar me-1"></i>{{ $guide->created_at->format('M d, Y') }}
-                            <span class="mx-2">Â·</span>
+                            <span class="mx-2">&middot;</span>
                             <i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views
                         </small>
                     </div>

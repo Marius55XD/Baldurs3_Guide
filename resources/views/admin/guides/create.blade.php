@@ -18,7 +18,7 @@
                     <div class="col-md-6">
                         <label class="form-label">Category <span class="text-danger">*</span></label>
                         <select name="category_id" class="form-select @error('category_id') is-invalid @enderror" required>
-                            <option value="">Select categoryâ€¦</option>
+                            <option value="">Select category...</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}" @selected(old('category_id') == $cat->id)>{{ $cat->name }}</option>
                             @endforeach

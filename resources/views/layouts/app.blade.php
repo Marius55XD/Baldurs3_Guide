@@ -174,7 +174,7 @@
                 </ul>
                 <form class="d-flex me-3" action="{{ route('guides.index') }}" method="GET">
                     <input class="form-control form-control-sm me-2" type="search" name="search"
-                           placeholder="Search guides…" value="{{ request('search') }}">
+                           placeholder="Search guides..." value="{{ request('search') }}">
                     <button class="btn btn-gold btn-sm" type="submit"><i class="bi bi-search"></i></button>
                 </form>
                 <ul class="navbar-nav">
@@ -187,6 +187,19 @@
                                 <i class="bi bi-person-circle me-1"></i>{{ auth()->user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="background-color:var(--bg3-card); border-color:var(--bg3-border);">
+                                <li>
+                                    <a class="dropdown-item" style="color:#d8ebff;" href="{{ route('profile.show') }}">
+                                        <i class="bi bi-person me-1"></i>Profile
+                                    </a>
+                                </li>
+                                @if(auth()->user()->isEditor())
+                                    <li>
+                                        <a class="dropdown-item" style="color:#d8ebff;" href="{{ route('admin.dashboard') }}">
+                                            <i class="bi bi-speedometer2 me-1"></i>Admin Dashboard
+                                        </a>
+                                    </li>
+                                @endif
+                                <li><hr class="dropdown-divider" style="border-color:var(--bg3-border);"></li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf

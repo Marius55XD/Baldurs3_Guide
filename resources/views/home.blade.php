@@ -32,7 +32,7 @@
         <div class="col-md-3 col-sm-6">
             <a href="{{ route('guides.index', ['category' => $category->slug]) }}" class="text-decoration-none">
                 <div class="bg3-card h-100 p-4 text-center">
-                    <div class="category-icon mb-2">{{ $category->icon ?? 'ðŸ“–' }}</div>
+                    <div class="category-icon mb-2">{{ $category->icon ?? '[Guide]' }}</div>
                     <h5 class="text-gold mb-1">{{ $category->name }}</h5>
                     <p class="small mb-2" style="color:#d8ebff;">{{ $category->description }}</p>
                     <span class="badge badge-category">{{ $category->guides_count }} guide{{ $category->guides_count !== 1 ? 's' : '' }}</span>
@@ -91,7 +91,7 @@
                 <div class="flex-grow-1">
                     <span class="badge badge-category mb-1">{{ $guide->category->name }}</span>
                     <h6 class="mb-1"><a href="{{ route('guides.show', $guide->slug) }}" class="text-gold text-decoration-none">{{ $guide->title }}</a></h6>
-                    <small style="color:#d8ebff;"><i class="bi bi-person me-1"></i>{{ $guide->author->name }} Â· {{ $guide->created_at->diffForHumans() }}</small>
+                    <small style="color:#d8ebff;"><i class="bi bi-person me-1"></i>{{ $guide->author->name }} &middot; {{ $guide->created_at->diffForHumans() }}</small>
                 </div>
             </div>
         </div>

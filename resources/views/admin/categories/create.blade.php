@@ -16,7 +16,7 @@
                 <div class="mb-3">
                     <label class="form-label">Icon / Emoji</label>
                     <input type="text" name="icon" class="form-control" value="{{ old('icon') }}"
-                           placeholder="e.g. âš”ï¸ or ðŸ§™">
+                           placeholder="e.g. sword or wizard">
                     <small style="color:#d8ebff;">An emoji or short symbol to represent this category.</small>
                 </div>
                 <div class="mb-4">
