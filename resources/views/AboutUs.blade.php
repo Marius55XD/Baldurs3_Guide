@@ -19,22 +19,36 @@
 	.about-link:hover {
 		color: var(--bg3-gold);
 	}
-	.layout-line {
-		height: 10px;
-		border-radius: 999px;
-		background: linear-gradient(90deg, rgba(143, 179, 217, 0.24), rgba(143, 179, 217, 0.08));
-		margin-bottom: 0.75rem;
+	.about-text {
+		color: #d8ebff;
+		line-height: 1.8;
 	}
-	.layout-line.w-100 { width: 100%; }
-	.layout-line.w-90 { width: 90%; }
-	.layout-line.w-75 { width: 75%; }
-	.layout-line.w-60 { width: 60%; }
-	.layout-btn {
-		width: 220px;
-		height: 46px;
-		border-radius: 8px;
+	.about-list {
+		padding-left: 1.1rem;
+		margin-bottom: 0;
+	}
+	.about-list li {
+		margin-bottom: 0.5rem;
+		color: #d8ebff;
+	}
+	.about-list li:last-child {
+		margin-bottom: 0;
+	}
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.team-member {
+		background-color: rgba(143, 179, 217, 0.07);
 		border: 1px solid var(--bg3-border);
-		background-color: rgba(143, 179, 217, 0.08);
+		border-radius: 8px;
+		padding: 1rem;
+	}
+	@media (max-width: 767.98px) {
+		.team-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
 @endpush
@@ -54,26 +68,60 @@
 		<section class="col-lg-9">
 			<div id="mission" class="bg3-card p-4 p-md-5 mb-4">
 				<h3 class="text-gold mb-4">Our Mission</h3>
-				<div class="layout-line w-100"></div>
-				<div class="layout-line w-100"></div>
-				<div class="layout-line w-90"></div>
-				<div class="layout-line w-75"></div>
+				<p class="about-text mb-3">
+					BG3 Guide exists to make Baldur's Gate 3 easier to learn and more fun to master.
+					We collect practical, tested tips so players can spend less time searching and more
+					time adventuring.
+				</p>
+				<p class="about-text mb-3">
+					Our focus is clarity. We explain mechanics in plain language, highlight common mistakes,
+					and provide step-by-step guidance that works for casual and experienced players alike.
+				</p>
+				<ul class="about-list">
+					<li>Publish clear walkthroughs for quests and hidden outcomes.</li>
+					<li>Share class and party build ideas for different playstyles.</li>
+					<li>Keep guides beginner-friendly without losing depth for veterans.</li>
+				</ul>
 			</div>
 
 			<div id="team" class="bg3-card p-4 p-md-5 mb-4">
 				<h3 class="text-gold mb-4">Our Team</h3>
-				<div class="layout-line w-100"></div>
-				<div class="layout-line w-90"></div>
-				<div class="layout-line w-100"></div>
-				<div class="layout-line w-60"></div>
+				<div class="team-grid">
+					<div class="team-member">
+						<h4 class="h5 text-gold mb-3"><i class="bi bi-person-circle me-2"></i>Marius Stuopelis</h4>
+						<p class="about-text mb-2"><strong>College:</strong> DKIT</p>
+						<p class="about-text mb-0"><strong>Program:</strong> Software Development</p>
+					</div>
+					<div class="team-member">
+						<h4 class="h5 text-gold mb-3"><i class="bi bi-person-circle me-2"></i>Gvidonas Buikys</h4>
+						<p class="about-text mb-2"><strong>College:</strong> DKIT</p>
+						<p class="about-text mb-0"><strong>Program:</strong> Software Development</p>
+					</div>
+				</div>
 			</div>
 
 			<div id="community" class="bg3-card p-4 p-md-5">
 				<h3 class="text-gold mb-4">Community</h3>
-				<div class="layout-line w-100"></div>
-				<div class="layout-line w-90"></div>
-				<div class="layout-line w-75"></div>
-				<div class="layout-btn mt-4"></div>
+				<p class="about-text mb-3">
+					BG3 Guide grows through player feedback. If you find a better route, a stronger build,
+					or a missed detail in a guide, we want to hear it.
+				</p>
+				<p class="about-text mb-4">
+					New contributors are welcome. You can start by creating an account and sharing your
+					favorite tactics with the community.
+				</p>
+				<p class="about-text mb-4">
+					As the game updates, we keep refining existing guides so the information stays relevant,
+					accurate, and useful for every new playthrough.
+				</p>
+				<div class="d-flex flex-wrap gap-2">
+					<a href="{{ route('register') }}" class="btn btn-gold">
+						<i class="bi bi-person-plus me-2"></i>Join Our Community
+					</a>
+					<a href="{{ route('guides.index') }}" class="btn btn-outline-gold">
+						<i class="bi bi-book me-2"></i>Browse Guides
+					</a>
+				</div>
 			</div>
 		</section>
 	</div>
