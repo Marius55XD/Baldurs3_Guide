@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'AboutUs')->name('about');
 Route::view('/faq', 'Faq')->name('faq');
+Route::view('/phone-support', 'PhoneSupport')->name('phone.support');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');

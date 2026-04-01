@@ -43,7 +43,7 @@
 			<div class="sidebar-card">
 				<h2 class="h4 contact-side-title">Contact Us</h2>
 				<a class="contact-side-link" href="#"><i class="bi bi-envelope-fill me-2"></i>Email Support</a>
-				<a class="contact-side-link" href="#"><i class="bi bi-telephone-fill me-2"></i>Phone Support</a>
+				<a class="contact-side-link" href="{{ route('phone.support') }}"><i class="bi bi-telephone-fill me-2"></i>Phone Support</a>
 				<a class="contact-side-link mb-0" href="{{ route('faq') }}"><i class="bi bi-question-circle-fill me-2"></i>FAQ</a>
 			</div>
 		</aside>
