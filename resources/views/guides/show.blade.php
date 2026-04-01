@@ -48,6 +48,48 @@
                 </div>
             </div>
 
+            <div class="bg3-card p-4 p-md-5 mt-4">
+                <h4 class="text-gold mb-3"><i class="bi bi-question-circle me-2"></i>Guide FAQ</h4>
+                <div class="accordion" id="guideFaqAccordion">
+                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                        <h2 class="accordion-header" id="guideFaqOneHeader">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqOne" aria-expanded="true" aria-controls="guideFaqOne" style="background-color:#123047; color:#d8ebff;">
+                                Is this guide updated for recent game patches?
+                            </button>
+                        </h2>
+                        <div id="guideFaqOne" class="accordion-collapse collapse show" aria-labelledby="guideFaqOneHeader" data-bs-parent="#guideFaqAccordion">
+                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                This guide reflects the latest version available in our site and is reviewed when major patch changes affect gameplay.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                        <h2 class="accordion-header" id="guideFaqTwoHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqTwo" aria-expanded="false" aria-controls="guideFaqTwo" style="background-color:#123047; color:#d8ebff;">
+                                Can I use this guide if I am new to BG3?
+                            </button>
+                        </h2>
+                        <div id="guideFaqTwo" class="accordion-collapse collapse" aria-labelledby="guideFaqTwoHeader" data-bs-parent="#guideFaqAccordion">
+                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                Yes. The steps are written to be clear for beginners while still useful for experienced players.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                        <h2 class="accordion-header" id="guideFaqThreeHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqThree" aria-expanded="false" aria-controls="guideFaqThree" style="background-color:#123047; color:#d8ebff;">
+                                What should I do if a step does not work as expected?
+                            </button>
+                        </h2>
+                        <div id="guideFaqThree" class="accordion-collapse collapse" aria-labelledby="guideFaqThreeHeader" data-bs-parent="#guideFaqAccordion">
+                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                Check your game choices and party setup first. If the issue persists, send us feedback through Contact Us with the guide title and step details.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @auth
                 @if(auth()->user()->isEditor())
                     <div class="mt-3 d-flex gap-2">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -13,6 +14,10 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 // ── Public ────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'AboutUs')->name('about');
+Route::view('/faq', 'Faq')->name('faq');
+Route::view('/phone-support', 'PhoneSupport')->name('phone.support');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
 Route::get('/guides/{slug}', [GuideController::class, 'show'])->name('guides.show');
 
