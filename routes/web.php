@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 // ── Public ────────────────────────────────────────────────
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/about', 'AboutUs')->name('about');
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
 Route::get('/guides/{slug}', [GuideController::class, 'show'])->name('guides.show');
 
