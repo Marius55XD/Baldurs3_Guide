@@ -6,6 +6,20 @@
 	.contact-shell {
 		padding: 1.5rem 0 2.5rem;
 	}
+	.contact-side-title {
+		color: var(--bg3-gold);
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+	.contact-side-link {
+		display: block;
+		color: #d8ebff;
+		text-decoration: none;
+		margin-bottom: 0.75rem;
+	}
+	.contact-side-link:hover {
+		color: var(--bg3-gold);
+	}
 	.contact-section {
 		background-color: transparent;
 	}
@@ -24,7 +38,16 @@
 
 @section('content')
 <div class="container contact-shell">
-	<div class="row justify-content-center">
+	<div class="row g-4">
+		<aside class="col-lg-3">
+			<div class="sidebar-card">
+				<h2 class="h4 contact-side-title">Contact Us</h2>
+				<a class="contact-side-link" href="#"><i class="bi bi-envelope-fill me-2"></i>Email Support</a>
+				<a class="contact-side-link" href="#"><i class="bi bi-telephone-fill me-2"></i>Phone Support</a>
+				<a class="contact-side-link mb-0" href="#"><i class="bi bi-question-circle-fill me-2"></i>FAQ</a>
+			</div>
+		</aside>
+
 		<section class="col-lg-9 contact-section">
 			<h1 class="h1 contact-form-title">Send us a message</h1>
 			<form method="POST" action="#">
