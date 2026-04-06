@@ -10,8 +10,8 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->isEditor()) {
-            abort(403, 'Unauthorized. Editor or Admin access required.');
+        if (!auth()->check() || !auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized. Admin access required.');
         }
 
         return $next($request);

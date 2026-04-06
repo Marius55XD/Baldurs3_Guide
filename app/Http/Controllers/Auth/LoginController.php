@@ -18,6 +18,10 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email'    => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'Please enter your password.',
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
@@ -26,7 +30,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'login' => 'Invalid email or password. Please try again.',
         ])->onlyInput('email');
     }
 

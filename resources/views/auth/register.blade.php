@@ -8,36 +8,35 @@
             <div class="bg3-card p-4 p-md-5">
                 <h2 class="text-gold mb-4 text-center"><i class="bi bi-person-plus me-2"></i>Create Account</h2>
 
-                @if($errors->any())
+                @if($errors->has('name') || $errors->has('email') || $errors->has('password') || $errors->has('password_confirmation'))
                     <div class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
+                        <div>{{ $errors->first('name') ?: ($errors->first('email') ?: ($errors->first('password') ?: $errors->first('password_confirmation'))) }}</div>
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" novalidate>
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                value="{{ old('name') }}" required autofocus>
-                        @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('name')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                value="{{ old('email') }}" required>
-                        @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('email')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
-                        @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('password')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" required>
+                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" required>
+                        @error('password_confirmation')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <button type="submit" class="btn btn-gold w-100">Create Account</button>
                 </form>

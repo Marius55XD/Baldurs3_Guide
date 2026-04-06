@@ -11,6 +11,11 @@ use Illuminate\Support\Str;
 
 class GuideController extends Controller
 {
+    private function ensureAdmin(): void
+    {
+        abort_unless(auth()->check() && auth()->user()->isAdmin(), 403, 'Unauthorized. Admin access required.');
+    }
+
     public function index()
     {
         $guides = Guide::with(['category', 'author'])->latest()->paginate(15);
@@ -19,6 +24,8 @@ class GuideController extends Controller
 
     public function create()
     {
+        $this->ensureAdmin();
+
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.guides.create', compact('categories', 'tags'));
@@ -26,6 +33,8 @@ class GuideController extends Controller
 
     public function store(Request $request)
     {
+        $this->ensureAdmin();
+
         $data = $request->validate([
             'title'           => ['required', 'string', 'max:255'],
             'content'         => ['required', 'string'],
@@ -59,6 +68,8 @@ class GuideController extends Controller
 
     public function edit(Guide $guide)
     {
+        $this->ensureAdmin();
+
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.guides.edit', compact('guide', 'categories', 'tags'));
@@ -66,6 +77,8 @@ class GuideController extends Controller
 
     public function update(Request $request, Guide $guide)
     {
+        $this->ensureAdmin();
+
         $data = $request->validate([
             'title'           => ['required', 'string', 'max:255'],
             'content'         => ['required', 'string'],
@@ -97,6 +110,8 @@ class GuideController extends Controller
 
     public function destroy(Guide $guide)
     {
+        $this->ensureAdmin();
+
         $guide->delete();
         return redirect()->route('admin.guides.index')
             ->with('success', 'Guide deleted.');
