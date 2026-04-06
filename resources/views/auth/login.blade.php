@@ -8,11 +8,9 @@
             <div class="bg3-card p-4 p-md-5">
                 <h2 class="text-gold mb-4 text-center"><i class="bi bi-door-open me-2"></i>Sign In</h2>
 
-                @if($errors->any())
+                @if($errors->has('login'))
                     <div class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
+                        <div>{{ $errors->first('login') }}</div>
                     </div>
                 @endif
 
