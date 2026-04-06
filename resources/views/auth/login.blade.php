@@ -8,24 +8,24 @@
             <div class="bg3-card p-4 p-md-5">
                 <h2 class="text-gold mb-4 text-center"><i class="bi bi-door-open me-2"></i>Sign In</h2>
 
-                @if($errors->has('login'))
+                @if($errors->has('login') || $errors->has('email') || $errors->has('password'))
                     <div class="alert alert-danger">
-                        <div>{{ $errors->first('login') }}</div>
+                        <div>{{ $errors->first('login') ?: ($errors->first('email') ?: $errors->first('password')) }}</div>
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}" novalidate>
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                value="{{ old('email') }}" required autofocus>
-                        @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('email')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
-                        @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('password')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-4 form-check">
                         <input type="checkbox" class="form-check-input" id="remember" name="remember">

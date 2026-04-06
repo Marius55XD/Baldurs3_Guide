@@ -9,3 +9,14 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+.auth-field-error {
+    display: block;
+    margin-top: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 123, 92, 0.35);
+    border-radius: 0.65rem;
+    background: linear-gradient(180deg, rgba(126, 26, 26, 0.95), rgba(96, 17, 17, 0.95));
+    color: #ffe6dc;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
