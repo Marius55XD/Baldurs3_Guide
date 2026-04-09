@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GuideController as AdminGuideController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -75,4 +76,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     Route::resource('guides',     AdminGuideController::class);
     Route::resource('categories', AdminCategoryController::class);
+
+    Route::get('/contact-messages', [AdminContactMessageController::class, 'index'])->name('contact-messages.index');
+    Route::get('/contact-messages/{contactMessage}', [AdminContactMessageController::class, 'show'])->name('contact-messages.show');
 });

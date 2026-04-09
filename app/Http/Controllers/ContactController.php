@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactFormSubmitted;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -40,15 +41,27 @@ class ContactController extends Controller
             'submitted_at' => now()->toDateTimeString(),
         ];
 
+        $contactMessage = ContactMessage::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'subject' => $validated['subject'],
+            'message' => $validated['message'],
+            'ip_address' => $request->ip(),
+            'user_agent' => (string) $request->userAgent(),
+        ]);
+
+        $payload['message_id'] = $contactMessage->id;
+
         try {
             Mail::to($adminEmail)->send(new ContactFormSubmitted($payload));
         } catch (TransportExceptionInterface $exception) {
             report($exception);
 
-            return back()->withInput()->with('error', 'We could not send your message right now. Please try again later.');
+            return back()->with('success', 'Message saved successfully. Email delivery is temporarily unavailable, but support can still review your message.');
         }
 
         Log::info('Contact form submission', [
+            'message_id' => $contactMessage->id,
             'name' => $payload['name'],
             'email' => $payload['email'],
             'subject' => $payload['subject'],
