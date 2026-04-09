@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class ProfileController extends Controller
 {
@@ -52,9 +53,27 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
         ]);
 
+        $emailChanged = $validated['email'] !== $user->email;
+
         $user->update($validated);
 
-        return back()->with('success', 'Profile details updated successfully.');
+        if ($emailChanged) {
+            $user->forceFill([
+                'email_verified_at' => null,
+            ])->save();
+
+            try {
+                $user->sendEmailVerificationNotification();
+            } catch (TransportExceptionInterface $exception) {
+                report($exception);
+
+                return back()->with('error', 'Profile updated, but we could not send the new verification email. Check your Gmail SMTP settings and resend it from the verification page.');
+            }
+        }
+
+        return back()->with('success', $emailChanged
+            ? 'Profile details updated. Check your inbox to verify the new email address.'
+            : 'Profile details updated successfully.');
     }
 
     public function updatePassword(Request $request)
