@@ -70,7 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // ── Admin ─────────────────────────────────────────────────
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('guides',     AdminGuideController::class);
