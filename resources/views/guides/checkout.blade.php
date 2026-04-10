@@ -33,9 +33,9 @@
                             <i class="bi bi-journal-text me-1"></i>Read Full Guide
                         </a>
                     @else
-                        <form method="POST" action="{{ route('guides.checkout.pay', $guide->slug) }}">
+                        <form id="checkoutPayForm" method="POST" action="{{ route('guides.checkout.pay', $guide->slug) }}">
                             @csrf
-                            <button type="submit" class="btn btn-gold">
+                            <button type="button" class="btn btn-gold js-confirm-pay-submit" data-guide-title="{{ $guide->title }}" data-pay-amount="EUR {{ number_format($price, 2) }}">
                                 <i class="bi bi-lock-fill me-1"></i>Pay EUR {{ number_format($price, 2) }}
                             </button>
                             <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary ms-2">Cancel</a>
@@ -51,4 +51,55 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="checkoutConfirmModal" tabindex="-1" aria-labelledby="checkoutConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color:#0b2233; border:1px solid #1e3a53; color:#d8ebff;">
+            <div class="modal-header" style="border-color:#1e3a53;">
+                <h5 class="modal-title text-gold" id="checkoutConfirmModalLabel">Confirm Payment</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-2">Are you sure you want to pay <strong id="checkoutConfirmAmount">EUR {{ number_format($price, 2) }}</strong> for:</p>
+                <p class="mb-0"><strong id="checkoutConfirmTitle">{{ $guide->title }}</strong>?</p>
+                <p class="small mb-0 mt-2" style="color:#8fb3d9;">
+                    Selecting "Yes, Pay Now" confirms this payment action.
+                </p>
+            </div>
+            <div class="modal-footer" style="border-color:#1e3a53;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="checkoutConfirmSubmit" class="btn btn-gold">Yes, Pay Now</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const button = document.querySelector('.js-confirm-pay-submit');
+        const form = document.getElementById('checkoutPayForm');
+        const modalElement = document.getElementById('checkoutConfirmModal');
+
+        if (!button || !form || !modalElement || typeof bootstrap === 'undefined') {
+            return;
+        }
+
+        const modal = new bootstrap.Modal(modalElement);
+        const confirmBtn = document.getElementById('checkoutConfirmSubmit');
+        const titleEl = document.getElementById('checkoutConfirmTitle');
+        const amountEl = document.getElementById('checkoutConfirmAmount');
+
+        button.addEventListener('click', function () {
+            titleEl.textContent = button.dataset.guideTitle || '{{ $guide->title }}';
+            amountEl.textContent = button.dataset.payAmount || 'EUR {{ number_format($price, 2) }}';
+            modal.show();
+        });
+
+        confirmBtn.addEventListener('click', function () {
+            form.submit();
+        });
+    });
+</script>
+@endpush

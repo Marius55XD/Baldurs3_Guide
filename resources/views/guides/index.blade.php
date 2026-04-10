@@ -95,7 +95,7 @@
                                 <i class="bi bi-check2-circle me-1"></i>Purchased
                             </span>
                         @else
-                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm">
+                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm js-confirm-pay-link" data-guide-title="{{ $guide->title }}">
                                 <i class="bi bi-credit-card me-1"></i>Pay for Guide
                             </a>
                         @endif
@@ -118,5 +118,50 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="payConfirmModal" tabindex="-1" aria-labelledby="payConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color:#0b2233; border:1px solid #1e3a53; color:#d8ebff;">
+            <div class="modal-header" style="border-color:#1e3a53;">
+                <h5 class="modal-title text-gold" id="payConfirmModalLabel">Confirm Purchase</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to continue to payment for <strong id="confirmGuideTitle">this guide</strong>?
+                <p class="small mb-0 mt-2" style="color:#8fb3d9;">
+                    By continuing, you confirm you want to proceed to the checkout step to complete payment.
+                </p>
+            </div>
+            <div class="modal-footer" style="border-color:#1e3a53;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="#" id="confirmPayLink" class="btn btn-gold">Yes, Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalElement = document.getElementById('payConfirmModal');
+        if (!modalElement || typeof bootstrap === 'undefined') {
+            return;
+        }
+
+        const modal = new bootstrap.Modal(modalElement);
+        const confirmLink = document.getElementById('confirmPayLink');
+        const titleEl = document.getElementById('confirmGuideTitle');
+
+        document.querySelectorAll('.js-confirm-pay-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                confirmLink.href = link.href;
+                titleEl.textContent = link.dataset.guideTitle || 'this guide';
+                modal.show();
+            });
+        });
+    });
+</script>
+@endpush
 
