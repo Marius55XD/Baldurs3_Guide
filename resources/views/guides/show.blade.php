@@ -16,8 +16,8 @@
             </nav>
 
             <div class="bg3-card p-4 p-md-5">
-                @if($guide->featured_image)
-                    <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
+                @if($guide->featured_image_url)
+                    <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
                          class="w-100 rounded mb-4" style="max-height:420px; object-fit:cover;"
                          loading="lazy" onerror="this.style.display='none'">
                 @endif

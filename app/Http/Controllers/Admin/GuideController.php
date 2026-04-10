@@ -16,6 +16,32 @@ class GuideController extends Controller
         abort_unless(auth()->check() && auth()->user()->isAdmin(), 403, 'Unauthorized. Admin access required.');
     }
 
+    private function storeFeaturedImage(Request $request, ?Guide $guide = null): ?string
+    {
+        if (! $request->hasFile('featured_image')) {
+            return $guide?->featured_image;
+        }
+
+        $featuredImage = $request->file('featured_image');
+        $featuredImageDir = public_path('images/guides');
+
+        if (! is_dir($featuredImageDir)) {
+            mkdir($featuredImageDir, 0755, true);
+        }
+
+        if ($guide && ! empty($guide->featured_image)) {
+            $oldFeaturedImagePath = public_path($guide->featured_image);
+            if (is_file($oldFeaturedImagePath)) {
+                @unlink($oldFeaturedImagePath);
+            }
+        }
+
+        $fileName = 'guide_' . ($guide?->id ?? 'new') . '_' . time() . '.' . $featuredImage->getClientOriginalExtension();
+        $featuredImage->move($featuredImageDir, $fileName);
+
+        return 'images/guides/' . $fileName;
+    }
+
     public function index()
     {
         $guides = Guide::with(['category', 'author'])->latest()->paginate(15);
@@ -41,7 +67,7 @@ class GuideController extends Controller
             'excerpt'         => ['nullable', 'string', 'max:500'],
             'category_id'     => ['required', 'exists:categories,id'],
             'status'          => ['required', 'in:draft,published'],
-            'featured_image'  => ['nullable', 'url', 'max:2048'],
+            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
             'tags'            => ['nullable', 'array'],
             'tags.*'          => ['exists:tags,id'],
         ]);
@@ -55,6 +81,8 @@ class GuideController extends Controller
         while (Guide::where('slug', $data['slug'])->exists()) {
             $data['slug'] = $originalSlug . '-' . $count++;
         }
+
+        $data['featured_image'] = $this->storeFeaturedImage($request);
 
         $guide = Guide::create($data);
 
@@ -85,7 +113,7 @@ class GuideController extends Controller
             'excerpt'         => ['nullable', 'string', 'max:500'],
             'category_id'     => ['required', 'exists:categories,id'],
             'status'          => ['required', 'in:draft,published'],
-            'featured_image'  => ['nullable', 'url', 'max:2048'],
+            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
             'tags'            => ['nullable', 'array'],
             'tags.*'          => ['exists:tags,id'],
         ]);
@@ -101,6 +129,8 @@ class GuideController extends Controller
             $data['slug'] = $slug;
         }
 
+        $data['featured_image'] = $this->storeFeaturedImage($request, $guide);
+
         $guide->update($data);
         $guide->tags()->sync($request->input('tags', []));
 
@@ -111,6 +141,13 @@ class GuideController extends Controller
     public function destroy(Guide $guide)
     {
         $this->ensureAdmin();
+
+        if (! empty($guide->featured_image)) {
+            $featuredImagePath = public_path($guide->featured_image);
+            if (is_file($featuredImagePath)) {
+                @unlink($featuredImagePath);
+            }
+        }
 
         $guide->delete();
         return redirect()->route('admin.guides.index')

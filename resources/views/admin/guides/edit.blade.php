@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-9">
         <div class="bg3-card p-4">
-            <form action="{{ route('admin.guides.update', $guide) }}" method="POST">
+            <form action="{{ route('admin.guides.update', $guide) }}" method="POST" enctype="multipart/form-data">
                 @csrf @method('PUT')
                 <div class="row g-3">
                     <div class="col-12">
@@ -45,10 +45,17 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Featured Image / GIF URL</label>
-                        <input type="url" name="featured_image" class="form-control"
-                               value="{{ old('featured_image', $guide->featured_image) }}" placeholder="https://example.com/image.jpg">
-                        <small style="color:#d8ebff;">Paste a direct image link (.jpg, .png, .webp, .gif).</small>
+                        <label class="form-label">Featured Image / GIF</label>
+                        @if($guide->featured_image_url)
+                            <div class="mb-2">
+                                <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
+                                     class="rounded" style="max-width:220px; max-height:140px; object-fit:cover;">
+                            </div>
+                        @endif
+                        <input type="file" name="featured_image" class="form-control @error('featured_image') is-invalid @enderror"
+                               accept=".jpg,.jpeg,.png,.webp,.gif">
+                        @error('featured_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <small style="color:#d8ebff;">Upload a new image to replace the current one.</small>
                     </div>
 
                     @if($tags->count())

@@ -6,11 +6,19 @@ use App\Models\Category;
 use App\Models\Guide;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class AdminGuideCrudTest extends TestCase
 {
     use RefreshDatabase;
+
+    private function fakeGuideImage(string $fileName = 'guide.png'): UploadedFile
+    {
+        $pngData = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO7+7akAAAAASUVORK5CYII=');
+
+        return UploadedFile::fake()->createWithContent($fileName, $pngData);
+    }
 
     public function test_admin_can_create_a_guide(): void
     {
@@ -30,7 +38,7 @@ class AdminGuideCrudTest extends TestCase
             'excerpt' => 'A quick boss fight guide.',
             'category_id' => $category->id,
             'status' => 'published',
-            'featured_image' => 'https://example.com/guide.jpg',
+            'featured_image' => $this->fakeGuideImage('guide.png'),
         ]);
 
         $response->assertRedirect(route('admin.guides.index'));
@@ -42,6 +50,9 @@ class AdminGuideCrudTest extends TestCase
             'user_id' => $admin->id,
             'status' => 'published',
         ]);
+
+        $guide = Guide::where('slug', 'how-to-beat-ketheric')->firstOrFail();
+        $this->assertStringStartsWith('images/guides/', $guide->featured_image ?? '');
     }
 
     public function test_admin_can_update_a_guide(): void
@@ -73,7 +84,7 @@ class AdminGuideCrudTest extends TestCase
             'excerpt' => 'Updated excerpt',
             'category_id' => $category->id,
             'status' => 'published',
-            'featured_image' => 'https://example.com/new-guide.jpg',
+            'featured_image' => $this->fakeGuideImage('new-guide.png'),
         ]);
 
         $response->assertRedirect(route('admin.guides.index'));
@@ -84,8 +95,10 @@ class AdminGuideCrudTest extends TestCase
             'slug' => 'new-title',
             'content' => 'Updated content',
             'status' => 'published',
-            'featured_image' => 'https://example.com/new-guide.jpg',
         ]);
+
+        $guide->refresh();
+        $this->assertStringStartsWith('images/guides/', $guide->featured_image ?? '');
     }
 
     public function test_admin_can_delete_a_guide(): void

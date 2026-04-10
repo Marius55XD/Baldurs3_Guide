@@ -52,8 +52,8 @@
         <div class="col-md-4">
             <a href="{{ route('guides.show', $guide->slug) }}" class="text-decoration-none h-100">
                 <div class="bg3-card h-100 p-4 d-flex flex-column">
-                    @if($guide->featured_image)
-                        <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
+                    @if($guide->featured_image_url)
+                        <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
                              class="w-100 rounded mb-3" style="height:180px; object-fit:cover;"
                              loading="lazy" onerror="this.style.display='none'">
                     @endif
@@ -83,8 +83,8 @@
         @foreach($recentGuides as $guide)
         <div class="col-md-6">
             <div class="bg3-card p-3 d-flex gap-3 align-items-start">
-                @if($guide->featured_image)
-                    <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
+                @if($guide->featured_image_url)
+                    <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
                          class="rounded" style="width:84px; height:84px; object-fit:cover;"
                          loading="lazy" onerror="this.style.display='none'">
                 @endif
