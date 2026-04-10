@@ -2,9 +2,24 @@
 @section('title', 'Register')
 
 @section('content')
+@php
+    $shadowheartGif = file_exists(public_path('images/shadowheart-banner.gif'))
+        ? asset('images/shadowheart-banner.gif')
+        : asset('images/bg3-hero.gif');
+@endphp
 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
+    <div class="row justify-content-center align-items-stretch g-4">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="bg3-card h-100 register-banner">
+                <img src="{{ $shadowheartGif }}" alt="Shadowheart banner" class="register-banner-img" loading="lazy">
+                <div class="register-banner-overlay">
+                    <h3 class="mb-2 text-gold">Join The Party</h3>
+                    <p class="mb-0">Create your account and unlock premium BG3 guide content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-xl-5">
             <div class="bg3-card p-4 p-md-5">
                 <h2 class="text-gold mb-4 text-center"><i class="bi bi-person-plus me-2"></i>Create Account</h2>
 
@@ -50,4 +65,30 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .register-banner {
+        position: relative;
+        overflow: hidden;
+        min-height: 100%;
+    }
+
+    .register-banner-img {
+        width: 100%;
+        height: 100%;
+        min-height: 540px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .register-banner-overlay {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 1.25rem;
+        background: linear-gradient(to top, rgba(3, 12, 20, 0.92), rgba(3, 12, 20, 0.12));
+        color: #d8ebff;
+    }
+</style>
+@endpush
 
