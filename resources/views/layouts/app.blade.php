@@ -53,6 +53,19 @@
         }
         .nav-link { color: #d8ebff !important; }
         .nav-link:hover { color: var(--bg3-gold) !important; }
+        .navbar-profile-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-profile-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(103, 232, 249, 0.6);
+            flex-shrink: 0;
+        }
         .bg3-card {
             background-color: var(--bg3-card);
             border: 1px solid var(--bg3-border);
@@ -199,8 +212,13 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="bi bi-speedometer2 me-1"></i>Admin</a></li>
                         @endif
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <i class="bi bi-person-circle me-1"></i>{{ auth()->user()->name }}
+                            <a class="nav-link dropdown-toggle navbar-profile-link" href="#" data-bs-toggle="dropdown">
+                                @if(auth()->user()->avatar)
+                                    <img src="{{ asset(auth()->user()->avatar) }}" alt="{{ auth()->user()->name }} avatar" class="navbar-profile-avatar">
+                                @else
+                                    <i class="bi bi-person-circle"></i>
+                                @endif
+                                <span>{{ auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="background-color:var(--bg3-card); border-color:var(--bg3-border);">
                                 <li>
