@@ -95,7 +95,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
         ]);
 
         $avatarFile = $validated['avatar'];

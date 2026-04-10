@@ -67,7 +67,7 @@ class GuideController extends Controller
             'excerpt'         => ['nullable', 'string', 'max:500'],
             'category_id'     => ['required', 'exists:categories,id'],
             'status'          => ['required', 'in:draft,published'],
-            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
+            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:10240'],
             'tags'            => ['nullable', 'array'],
             'tags.*'          => ['exists:tags,id'],
         ]);
@@ -113,7 +113,7 @@ class GuideController extends Controller
             'excerpt'         => ['nullable', 'string', 'max:500'],
             'category_id'     => ['required', 'exists:categories,id'],
             'status'          => ['required', 'in:draft,published'],
-            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
+            'featured_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:10240'],
             'tags'            => ['nullable', 'array'],
             'tags.*'          => ['exists:tags,id'],
         ]);
