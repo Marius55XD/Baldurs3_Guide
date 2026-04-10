@@ -208,6 +208,11 @@
                                         <i class="bi bi-person me-1"></i>Profile
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" style="color:#d8ebff;" href="{{ route('purchases.index') }}">
+                                        <i class="bi bi-bag-check me-1"></i>My Purchases
+                                    </a>
+                                </li>
                                 @if(auth()->user()->isEditor())
                                     <li>
                                         <a class="dropdown-item" style="color:#d8ebff;" href="{{ route('admin.dashboard') }}">
