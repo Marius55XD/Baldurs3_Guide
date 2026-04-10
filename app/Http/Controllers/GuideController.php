@@ -59,7 +59,7 @@ class GuideController extends Controller
                 || $user->hasPurchasedGuide($guide);
         }
 
-        $previewContent = $hasFullAccess ? null : Str::words($guide->content, 120, '...');
+        $previewContent = $hasFullAccess ? null : Str::words($guide->content, 55, '...');
 
         return view('guides.show', compact('guide', 'related', 'hasFullAccess', 'previewContent'));
     }

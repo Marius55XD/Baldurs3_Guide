@@ -74,7 +74,7 @@
                                 {{ $guide->title }}
                             </a>
                         </h5>
-                        <p class="mb-2 small" style="color:#d8ebff;">{{ $guide->excerpt }}</p>
+                        <p class="mb-2 small" style="color:#d8ebff;">{{ \Illuminate\Support\Str::limit($guide->excerpt, 110) }}</p>
                         <small style="color:#d8ebff;">
                             <i class="bi bi-person me-1"></i>{{ $guide->author->name }}
                             <span class="mx-2">&middot;</span>
