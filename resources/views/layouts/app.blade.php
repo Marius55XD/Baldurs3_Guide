@@ -138,7 +138,11 @@
         }
         .guide-content { line-height: 1.8; }
         .guide-content h2, .guide-content h3 { color: var(--bg3-gold); margin-top: 2rem; }
-        .category-icon { font-size: 2.5rem; color: var(--bg3-gold); }
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--bg3-gold);
+            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+        }
         footer {
             background-color: var(--bg3-darker);
             border-top: 2px solid var(--bg3-border);
