@@ -21,7 +21,14 @@
                          class="w-100 rounded mb-4" style="max-height:420px; object-fit:cover;"
                          loading="lazy" onerror="this.style.display='none'">
                 @endif
-                <span class="badge badge-category mb-3">{{ $guide->category->name }}</span>
+                <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+                    <span class="badge badge-category">{{ $guide->category->name }}</span>
+                    @if($hasPurchased)
+                        <span class="badge" style="background-color:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                            <i class="bi bi-check-circle me-1"></i>Purchased
+                        </span>
+                    @endif
+                </div>
                 <h1 class="text-gold mb-3">{{ $guide->title }}</h1>
 
                 <div class="d-flex gap-4 mb-4 small" style="color:#d8ebff;">

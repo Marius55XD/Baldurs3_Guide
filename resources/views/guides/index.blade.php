@@ -59,6 +59,7 @@
 
             @forelse($guides as $guide)
             <div class="bg3-card mb-3 p-4">
+                @php($isPurchased = auth()->check() && $purchasedGuideIds->contains($guide->id))
                 @if($guide->featured_image)
                     <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
                          class="w-100 rounded mb-3" style="height:220px; object-fit:cover;"
@@ -68,6 +69,11 @@
                     <div class="flex-grow-1">
                         <div class="mb-2">
                             <span class="badge badge-category me-2">{{ $guide->category->name }}</span>
+                            @if($isPurchased)
+                                <span class="badge" style="background-color:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                                    <i class="bi bi-check-circle me-1"></i>Purchased
+                                </span>
+                            @endif
                         </div>
                         <h5 class="mb-2">
                             <a href="{{ route('guides.show', $guide->slug) }}" class="text-gold text-decoration-none">
@@ -84,9 +90,15 @@
                         </small>
                     </div>
                     <div class="d-flex flex-column gap-2">
-                        <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm">
-                            <i class="bi bi-credit-card me-1"></i>Pay for Guide
-                        </a>
+                        @if($isPurchased)
+                            <span class="btn btn-outline-gold btn-sm disabled" aria-disabled="true">
+                                <i class="bi bi-check2-circle me-1"></i>Purchased
+                            </span>
+                        @else
+                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm">
+                                <i class="bi bi-credit-card me-1"></i>Pay for Guide
+                            </a>
+                        @endif
                         <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-gold btn-sm">
                             Read <i class="bi bi-arrow-right"></i>
                         </a>

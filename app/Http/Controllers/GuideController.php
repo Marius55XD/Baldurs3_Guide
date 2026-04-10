@@ -30,8 +30,14 @@ class GuideController extends Controller
 
         $guides = $query->latest()->paginate(12)->withQueryString();
         $categories = Category::all();
+        $user = $request->user();
+        $purchasedGuideIds = collect();
 
-        return view('guides.index', compact('guides', 'categories'));
+        if ($user) {
+            $purchasedGuideIds = $user->guidePurchases()->pluck('guide_id');
+        }
+
+        return view('guides.index', compact('guides', 'categories', 'purchasedGuideIds'));
     }
 
     public function show(string $slug)
@@ -52,15 +58,17 @@ class GuideController extends Controller
 
         $user = request()->user();
         $hasFullAccess = false;
+        $hasPurchased = false;
 
         if ($user) {
+            $hasPurchased = $user->hasPurchasedGuide($guide);
             $hasFullAccess = $user->isEditor()
                 || $user->id === $guide->user_id
-                || $user->hasPurchasedGuide($guide);
+                || $hasPurchased;
         }
 
         $previewContent = $hasFullAccess ? null : Str::words($guide->content, 55, '...');
 
-        return view('guides.show', compact('guide', 'related', 'hasFullAccess', 'previewContent'));
+        return view('guides.show', compact('guide', 'related', 'hasFullAccess', 'hasPurchased', 'previewContent'));
     }
 }
