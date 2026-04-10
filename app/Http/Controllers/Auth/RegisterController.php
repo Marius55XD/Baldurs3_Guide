@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class RegisterController extends Controller
 {
@@ -36,6 +38,17 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/');
+        try {
+            event(new Registered($user));
+        } catch (TransportExceptionInterface $exception) {
+            report($exception);
+
+            return redirect()->route('verification.notice')->with(
+                'error',
+                'Account created, but we could not send the verification email. Please check SMTP settings and click "Resend Verification Email".'
+            );
+        }
+
+        return redirect()->route('verification.notice')->with('status', 'verification-link-sent');
     }
 }

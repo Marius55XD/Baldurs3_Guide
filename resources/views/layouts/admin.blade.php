@@ -69,6 +69,7 @@
         .page-link:hover { background-color: var(--bg3-gold); color: var(--bg3-dark); }
         .page-item.active .page-link { background-color: var(--bg3-gold); border-color: var(--bg3-gold); color: var(--bg3-dark); }
         .text-gold { color: var(--bg3-gold) !important; }
+        .badge-unread { background-color: #ef4444; color: white; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 999px; margin-left: 0.5rem; }
     </style>
 </head>
 <body>
@@ -85,6 +86,13 @@
             </a>
             <a href="{{ route('admin.categories.index') }}" class="nav-link @if(request()->routeIs('admin.categories.*')) active @endif">
                 <i class="bi bi-tags"></i> Categories
+            </a>
+            <a href="{{ route('admin.contact-messages.index') }}" class="nav-link @if(request()->routeIs('admin.contact-messages.*')) active @endif">
+                <i class="bi bi-chat-left-text"></i> Contact Messages
+                @php $unreadCount = \App\Models\ContactMessage::whereNull('read_at')->count(); @endphp
+                @if($unreadCount > 0)
+                    <span class="badge-unread">{{ $unreadCount }}</span>
+                @endif
             </a>
             <hr style="border-color: var(--bg3-border); margin: .5rem 1.25rem;">
             <a href="{{ url('/') }}" class="nav-link"><i class="bi bi-house"></i> View Site</a>

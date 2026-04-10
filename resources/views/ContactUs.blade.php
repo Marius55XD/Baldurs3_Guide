@@ -50,6 +50,11 @@
 
 		<section class="col-lg-9 contact-section">
 			<h1 class="h1 contact-form-title">Send us a message</h1>
+			@if (session('error'))
+				<div class="alert alert-danger" role="alert">
+					{{ session('error') }}
+				</div>
+			@endif
 			<form method="POST" action="{{ route('contact.send') }}">
 				@csrf
 				<div class="mb-3">

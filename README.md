@@ -41,6 +41,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 `
 
+For real email delivery, set `MAIL_MAILER=smtp` and use Gmail with a Google App Password. The sender email must be a real Gmail mailbox you control; the password is the app password generated in your Google Account after enabling 2-Step Verification.
+
 ### 4. Create the database in phpMyAdmin or run:
 `bash
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS bg3_guide CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
