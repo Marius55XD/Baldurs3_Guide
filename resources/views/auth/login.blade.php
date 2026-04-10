@@ -2,10 +2,14 @@
 @section('title', 'Login')
 
 @section('content')
+@php
+    $loginBgGif = asset('images/guides/guide_3_1775835640.gif');
+@endphp
+<div class="login-bg-wrap py-5">
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <div class="bg3-card p-4 p-md-5">
+            <div class="bg3-card p-4 p-md-5 login-card">
                 <h2 class="text-gold mb-4 text-center"><i class="bi bi-door-open me-2"></i>Sign In</h2>
 
                 @if($errors->has('login') || $errors->has('email') || $errors->has('password'))
@@ -42,5 +46,31 @@
         </div>
     </div>
 </div>
+</div>
 @endsection
+
+@push('styles')
+<style>
+    .login-bg-wrap {
+        position: relative;
+        min-height: calc(100vh - 210px);
+        background:
+            linear-gradient(rgba(3, 12, 20, 0.74), rgba(3, 12, 20, 0.74)),
+            url('{{ $loginBgGif }}') center center / cover no-repeat;
+    }
+
+    .login-card {
+        background-color: rgba(11, 34, 51, 0.9);
+        border-color: rgba(103, 232, 249, 0.35);
+        backdrop-filter: blur(2px);
+    }
+
+    @media (max-width: 767.98px) {
+        .login-bg-wrap {
+            min-height: auto;
+            background-position: 58% center;
+        }
+    }
+</style>
+@endpush
 
