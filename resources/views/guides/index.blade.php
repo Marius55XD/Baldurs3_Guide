@@ -83,9 +83,14 @@
                             <i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views
                         </small>
                     </div>
-                    <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-gold btn-sm">
-                        Read <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm">
+                            <i class="bi bi-credit-card me-1"></i>Pay for Guide
+                        </a>
+                        <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-gold btn-sm">
+                            Read <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             @empty

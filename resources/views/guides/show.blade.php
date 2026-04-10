@@ -31,6 +31,12 @@
                     <span><i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views</span>
                 </div>
 
+                <div class="mb-4">
+                    <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold">
+                        <i class="bi bi-credit-card me-1"></i>Pay for this Guide
+                    </a>
+                </div>
+
                 @if($guide->tags->count())
                     <div class="mb-4">
                         @foreach($guide->tags as $tag)
