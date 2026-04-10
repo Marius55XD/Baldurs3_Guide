@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-9">
         <div class="bg3-card p-4">
-            <form action="{{ route('admin.guides.store') }}" method="POST">
+            <form action="{{ route('admin.guides.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-3">
                     <div class="col-12">
@@ -49,10 +49,11 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Featured Image / GIF URL</label>
-                        <input type="url" name="featured_image" class="form-control"
-                               value="{{ old('featured_image') }}" placeholder="https://example.com/image.jpg">
-                        <small style="color:#d8ebff;">Paste a direct image link (.jpg, .png, .webp, .gif).</small>
+                        <label class="form-label">Featured Image / GIF</label>
+                        <input type="file" name="featured_image" class="form-control @error('featured_image') is-invalid @enderror"
+                               accept=".jpg,.jpeg,.png,.webp,.gif">
+                        @error('featured_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <small style="color:#d8ebff;">Upload an image file (.jpg, .png, .webp, .gif).</small>
                     </div>
 
                     @if($tags->count())

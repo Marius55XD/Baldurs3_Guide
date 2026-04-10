@@ -60,8 +60,8 @@
             @forelse($guides as $guide)
             <div class="bg3-card mb-3 p-4">
                 @php($isPurchased = auth()->check() && $purchasedGuideIds->contains($guide->id))
-                @if($guide->featured_image)
-                    <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
+                @if($guide->featured_image_url)
+                    <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
                          class="w-100 rounded mb-3" style="height:220px; object-fit:cover;"
                          loading="lazy" onerror="this.style.display='none'">
                 @endif

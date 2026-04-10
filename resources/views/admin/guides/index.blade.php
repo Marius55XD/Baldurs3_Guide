@@ -29,8 +29,8 @@
             @forelse($guides as $guide)
             <tr>
                 <td class="ps-4">
-                    @if($guide->featured_image)
-                        <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
+                    @if($guide->featured_image_url)
+                        <img src="{{ $guide->featured_image_url }}" alt="{{ $guide->title }}"
                              style="width:72px; height:48px; object-fit:cover; border-radius:6px;"
                              loading="lazy" onerror="this.style.display='none'">
                     @else

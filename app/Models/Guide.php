@@ -28,6 +28,19 @@ class Guide extends Model
         });
     }
 
+    public function getFeaturedImageUrlAttribute(): ?string
+    {
+        if (empty($this->featured_image)) {
+            return null;
+        }
+
+        if (Str::startsWith($this->featured_image, ['http://', 'https://', '//'])) {
+            return $this->featured_image;
+        }
+
+        return asset($this->featured_image);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
