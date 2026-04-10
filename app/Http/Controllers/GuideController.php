@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guide;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class GuideController extends Controller
 {
@@ -29,8 +30,14 @@ class GuideController extends Controller
 
         $guides = $query->latest()->paginate(12)->withQueryString();
         $categories = Category::all();
+        $user = $request->user();
+        $purchasedGuideIds = collect();
 
-        return view('guides.index', compact('guides', 'categories'));
+        if ($user) {
+            $purchasedGuideIds = $user->guidePurchases()->pluck('guide_id');
+        }
+
+        return view('guides.index', compact('guides', 'categories', 'purchasedGuideIds'));
     }
 
     public function show(string $slug)
@@ -49,6 +56,19 @@ class GuideController extends Controller
             ->take(3)
             ->get();
 
-        return view('guides.show', compact('guide', 'related'));
+        $user = request()->user();
+        $hasFullAccess = false;
+        $hasPurchased = false;
+
+        if ($user) {
+            $hasPurchased = $user->hasPurchasedGuide($guide);
+            $hasFullAccess = $user->isEditor()
+                || $user->id === $guide->user_id
+                || $hasPurchased;
+        }
+
+        $previewContent = $hasFullAccess ? null : Str::words($guide->content, 55, '...');
+
+        return view('guides.show', compact('guide', 'related', 'hasFullAccess', 'hasPurchased', 'previewContent'));
     }
 }

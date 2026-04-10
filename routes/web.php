@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\GuidePaymentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -24,6 +26,8 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
 Route::get('/guides/{slug}', [GuideController::class, 'show'])->name('guides.show');
+Route::get('/guides/{slug}/checkout', [GuidePaymentController::class, 'show'])->name('guides.checkout');
+Route::post('/guides/{slug}/checkout', [GuidePaymentController::class, 'pay'])->name('guides.checkout.pay')->middleware('auth');
 
 // ── Auth ──────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
@@ -65,6 +69,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/my-purchases', [PurchaseController::class, 'index'])->name('purchases.index');
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');

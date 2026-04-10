@@ -59,6 +59,7 @@
 
             @forelse($guides as $guide)
             <div class="bg3-card mb-3 p-4">
+                @php($isPurchased = auth()->check() && $purchasedGuideIds->contains($guide->id))
                 @if($guide->featured_image)
                     <img src="{{ $guide->featured_image }}" alt="{{ $guide->title }}"
                          class="w-100 rounded mb-3" style="height:220px; object-fit:cover;"
@@ -68,13 +69,18 @@
                     <div class="flex-grow-1">
                         <div class="mb-2">
                             <span class="badge badge-category me-2">{{ $guide->category->name }}</span>
+                            @if($isPurchased)
+                                <span class="badge" style="background-color:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                                    <i class="bi bi-check-circle me-1"></i>Purchased
+                                </span>
+                            @endif
                         </div>
                         <h5 class="mb-2">
                             <a href="{{ route('guides.show', $guide->slug) }}" class="text-gold text-decoration-none">
                                 {{ $guide->title }}
                             </a>
                         </h5>
-                        <p class="mb-2 small" style="color:#d8ebff;">{{ $guide->excerpt }}</p>
+                        <p class="mb-2 small" style="color:#d8ebff;">{{ \Illuminate\Support\Str::limit($guide->excerpt, 110) }}</p>
                         <small style="color:#d8ebff;">
                             <i class="bi bi-person me-1"></i>{{ $guide->author->name }}
                             <span class="mx-2">&middot;</span>
@@ -83,9 +89,20 @@
                             <i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views
                         </small>
                     </div>
-                    <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-gold btn-sm">
-                        Read <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <div class="d-flex flex-column gap-2">
+                        @if($isPurchased)
+                            <span class="btn btn-outline-gold btn-sm disabled" aria-disabled="true">
+                                <i class="bi bi-check2-circle me-1"></i>Purchased
+                            </span>
+                        @else
+                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm js-confirm-pay-link" data-guide-title="{{ $guide->title }}">
+                                <i class="bi bi-credit-card me-1"></i>Pay for Guide
+                            </a>
+                        @endif
+                        <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-gold btn-sm">
+                            Read <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             @empty
@@ -101,5 +118,50 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="payConfirmModal" tabindex="-1" aria-labelledby="payConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color:#0b2233; border:1px solid #1e3a53; color:#d8ebff;">
+            <div class="modal-header" style="border-color:#1e3a53;">
+                <h5 class="modal-title text-gold" id="payConfirmModalLabel">Confirm Purchase</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to continue to payment for <strong id="confirmGuideTitle">this guide</strong>?
+                <p class="small mb-0 mt-2" style="color:#8fb3d9;">
+                    By continuing, you confirm you want to proceed to the checkout step to complete payment.
+                </p>
+            </div>
+            <div class="modal-footer" style="border-color:#1e3a53;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="#" id="confirmPayLink" class="btn btn-gold">Yes, Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalElement = document.getElementById('payConfirmModal');
+        if (!modalElement || typeof bootstrap === 'undefined') {
+            return;
+        }
+
+        const modal = new bootstrap.Modal(modalElement);
+        const confirmLink = document.getElementById('confirmPayLink');
+        const titleEl = document.getElementById('confirmGuideTitle');
+
+        document.querySelectorAll('.js-confirm-pay-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                confirmLink.href = link.href;
+                titleEl.textContent = link.dataset.guideTitle || 'this guide';
+                modal.show();
+            });
+        });
+    });
+</script>
+@endpush
 

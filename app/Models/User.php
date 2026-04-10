@@ -37,6 +37,18 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->hasMany(Guide::class);
     }
 
+    public function guidePurchases()
+    {
+        return $this->hasMany(GuidePurchase::class);
+    }
+
+    public function hasPurchasedGuide(Guide $guide): bool
+    {
+        return $this->guidePurchases()
+            ->where('guide_id', $guide->id)
+            ->exists();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

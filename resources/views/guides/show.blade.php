@@ -21,7 +21,14 @@
                          class="w-100 rounded mb-4" style="max-height:420px; object-fit:cover;"
                          loading="lazy" onerror="this.style.display='none'">
                 @endif
-                <span class="badge badge-category mb-3">{{ $guide->category->name }}</span>
+                <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+                    <span class="badge badge-category">{{ $guide->category->name }}</span>
+                    @if($hasPurchased)
+                        <span class="badge" style="background-color:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                            <i class="bi bi-check-circle me-1"></i>Purchased
+                        </span>
+                    @endif
+                </div>
                 <h1 class="text-gold mb-3">{{ $guide->title }}</h1>
 
                 <div class="d-flex gap-4 mb-4 small" style="color:#d8ebff;">
@@ -31,7 +38,15 @@
                     <span><i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views</span>
                 </div>
 
-                @if($guide->tags->count())
+                @if(!$hasFullAccess)
+                    <div class="mb-4">
+                        <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold js-confirm-pay-link" data-guide-title="{{ $guide->title }}">
+                            <i class="bi bi-credit-card me-1"></i>Unlock Full Guide
+                        </a>
+                    </div>
+                @endif
+
+                @if($hasFullAccess && $guide->tags->count())
                     <div class="mb-4">
                         @foreach($guide->tags as $tag)
                             <span class="badge me-1" style="background-color:#2a1e0a; border:1px solid #3d2e0f; color:#d8ebff;">
@@ -43,52 +58,69 @@
 
                 <hr style="border-color:#3d2e0f;">
 
-                <div class="guide-content mt-4" style="color:#e8d5b0;">
-                    {!! nl2br(e($guide->content)) !!}
-                </div>
+                @if($hasFullAccess)
+                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                        {!! nl2br(e($guide->content)) !!}
+                    </div>
+                @else
+                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                        {!! nl2br(e($previewContent)) !!}
+                    </div>
+                    <div class="alert mt-4" style="background:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                        <strong><i class="bi bi-lock-fill me-1"></i>Preview mode:</strong>
+                        You are viewing only the beginning of this guide. Complete payment to unlock the full content.
+                        <div class="mt-3">
+                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm js-confirm-pay-link" data-guide-title="{{ $guide->title }}">
+                                <i class="bi bi-credit-card me-1"></i>Pay and Unlock
+                            </a>
+                        </div>
+                    </div>
+                @endif
             </div>
 
-            <div class="bg3-card p-4 p-md-5 mt-4">
-                <h4 class="text-gold mb-3"><i class="bi bi-question-circle me-2"></i>Guide FAQ</h4>
-                <div class="accordion" id="guideFaqAccordion">
-                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
-                        <h2 class="accordion-header" id="guideFaqOneHeader">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqOne" aria-expanded="true" aria-controls="guideFaqOne" style="background-color:#123047; color:#d8ebff;">
-                                Is this guide updated for recent game patches?
-                            </button>
-                        </h2>
-                        <div id="guideFaqOne" class="accordion-collapse collapse show" aria-labelledby="guideFaqOneHeader" data-bs-parent="#guideFaqAccordion">
-                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
-                                This guide reflects the latest version available in our site and is reviewed when major patch changes affect gameplay.
+            @if($hasFullAccess)
+                <div class="bg3-card p-4 p-md-5 mt-4">
+                    <h4 class="text-gold mb-3"><i class="bi bi-question-circle me-2"></i>Guide FAQ</h4>
+                    <div class="accordion" id="guideFaqAccordion">
+                        <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                            <h2 class="accordion-header" id="guideFaqOneHeader">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqOne" aria-expanded="true" aria-controls="guideFaqOne" style="background-color:#123047; color:#d8ebff;">
+                                    Is this guide updated for recent game patches?
+                                </button>
+                            </h2>
+                            <div id="guideFaqOne" class="accordion-collapse collapse show" aria-labelledby="guideFaqOneHeader" data-bs-parent="#guideFaqAccordion">
+                                <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                    This guide reflects the latest version available in our site and is reviewed when major patch changes affect gameplay.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
-                        <h2 class="accordion-header" id="guideFaqTwoHeader">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqTwo" aria-expanded="false" aria-controls="guideFaqTwo" style="background-color:#123047; color:#d8ebff;">
-                                Can I use this guide if I am new to BG3?
-                            </button>
-                        </h2>
-                        <div id="guideFaqTwo" class="accordion-collapse collapse" aria-labelledby="guideFaqTwoHeader" data-bs-parent="#guideFaqAccordion">
-                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
-                                Yes. The steps are written to be clear for beginners while still useful for experienced players.
+                        <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                            <h2 class="accordion-header" id="guideFaqTwoHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqTwo" aria-expanded="false" aria-controls="guideFaqTwo" style="background-color:#123047; color:#d8ebff;">
+                                    Can I use this guide if I am new to BG3?
+                                </button>
+                            </h2>
+                            <div id="guideFaqTwo" class="accordion-collapse collapse" aria-labelledby="guideFaqTwoHeader" data-bs-parent="#guideFaqAccordion">
+                                <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                    Yes. The steps are written to be clear for beginners while still useful for experienced players.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
-                        <h2 class="accordion-header" id="guideFaqThreeHeader">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqThree" aria-expanded="false" aria-controls="guideFaqThree" style="background-color:#123047; color:#d8ebff;">
-                                What should I do if a step does not work as expected?
-                            </button>
-                        </h2>
-                        <div id="guideFaqThree" class="accordion-collapse collapse" aria-labelledby="guideFaqThreeHeader" data-bs-parent="#guideFaqAccordion">
-                            <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
-                                Check your game choices and party setup first. If the issue persists, send us feedback through Contact Us with the guide title and step details.
+                        <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
+                            <h2 class="accordion-header" id="guideFaqThreeHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guideFaqThree" aria-expanded="false" aria-controls="guideFaqThree" style="background-color:#123047; color:#d8ebff;">
+                                    What should I do if a step does not work as expected?
+                                </button>
+                            </h2>
+                            <div id="guideFaqThree" class="accordion-collapse collapse" aria-labelledby="guideFaqThreeHeader" data-bs-parent="#guideFaqAccordion">
+                                <div class="accordion-body" style="background-color:#0e2436; color:#d8ebff;">
+                                    Check your game choices and party setup first. If the issue persists, send us feedback through Contact Us with the guide title and step details.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             @auth
                 @if(auth()->user()->isEditor())
@@ -127,5 +159,50 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="payConfirmModal" tabindex="-1" aria-labelledby="payConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color:#0b2233; border:1px solid #1e3a53; color:#d8ebff;">
+            <div class="modal-header" style="border-color:#1e3a53;">
+                <h5 class="modal-title text-gold" id="payConfirmModalLabel">Confirm Purchase</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to continue to payment for <strong id="confirmGuideTitle">this guide</strong>?
+                <p class="small mb-0 mt-2" style="color:#8fb3d9;">
+                    By continuing, you confirm you want to proceed to the checkout step to complete payment.
+                </p>
+            </div>
+            <div class="modal-footer" style="border-color:#1e3a53;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="#" id="confirmPayLink" class="btn btn-gold">Yes, Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalElement = document.getElementById('payConfirmModal');
+        if (!modalElement || typeof bootstrap === 'undefined') {
+            return;
+        }
+
+        const modal = new bootstrap.Modal(modalElement);
+        const confirmLink = document.getElementById('confirmPayLink');
+        const titleEl = document.getElementById('confirmGuideTitle');
+
+        document.querySelectorAll('.js-confirm-pay-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                confirmLink.href = link.href;
+                titleEl.textContent = link.dataset.guideTitle || 'this guide';
+                modal.show();
+            });
+        });
+    });
+</script>
+@endpush
 

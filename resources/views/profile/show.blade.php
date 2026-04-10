@@ -8,11 +8,14 @@
             <aside class="bg3-card p-4 profile-sidebar h-100">
                 <h4 class="text-gold mb-3">My Profile</h4>
                 <nav class="nav flex-column gap-2">
-                    <a class="profile-nav-link active" href="{{ route('profile.show') }}">
+                    <a class="profile-nav-link {{ request()->routeIs('profile.show') ? 'active' : '' }}" href="{{ route('profile.show') }}">
                         <i class="bi bi-grid me-2"></i>Dashboard
                     </a>
                     <a class="profile-nav-link" href="{{ route('guides.index') }}">
                         <i class="bi bi-journal-richtext me-2"></i>My Guides
+                    </a>
+                    <a class="profile-nav-link {{ request()->routeIs('purchases.index') ? 'active' : '' }}" href="{{ route('purchases.index') }}">
+                        <i class="bi bi-bag-check me-2"></i>My Purchases
                     </a>
                     <a class="profile-nav-link" href="{{ route('profile.show') }}#settings">
                         <i class="bi bi-gear me-2"></i>Settings
