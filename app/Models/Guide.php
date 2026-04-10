@@ -43,6 +43,11 @@ class Guide extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(GuidePurchase::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guide;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class GuideController extends Controller
 {
@@ -49,6 +50,17 @@ class GuideController extends Controller
             ->take(3)
             ->get();
 
-        return view('guides.show', compact('guide', 'related'));
+        $user = request()->user();
+        $hasFullAccess = false;
+
+        if ($user) {
+            $hasFullAccess = $user->isEditor()
+                || $user->id === $guide->user_id
+                || $user->hasPurchasedGuide($guide);
+        }
+
+        $previewContent = $hasFullAccess ? null : Str::words($guide->content, 120, '...');
+
+        return view('guides.show', compact('guide', 'related', 'hasFullAccess', 'previewContent'));
     }
 }

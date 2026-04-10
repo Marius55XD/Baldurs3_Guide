@@ -25,13 +25,22 @@
                 </p>
 
                 @auth
-                    <form method="POST" action="{{ route('guides.checkout.pay', $guide->slug) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-gold">
-                            <i class="bi bi-lock-fill me-1"></i>Pay EUR {{ number_format($price, 2) }}
-                        </button>
-                        <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary ms-2">Cancel</a>
-                    </form>
+                    @if($hasAccess)
+                        <div class="alert mb-3" style="background:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                            You already have full access to this guide.
+                        </div>
+                        <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-gold">
+                            <i class="bi bi-journal-text me-1"></i>Read Full Guide
+                        </a>
+                    @else
+                        <form method="POST" action="{{ route('guides.checkout.pay', $guide->slug) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-gold">
+                                <i class="bi bi-lock-fill me-1"></i>Pay EUR {{ number_format($price, 2) }}
+                            </button>
+                            <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+                        </form>
+                    @endif
                 @else
                     <a href="{{ route('login') }}" class="btn btn-gold">
                         <i class="bi bi-person-lock me-1"></i>Login to Continue

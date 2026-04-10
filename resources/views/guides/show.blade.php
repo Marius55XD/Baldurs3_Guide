@@ -31,11 +31,13 @@
                     <span><i class="bi bi-eye me-1"></i>{{ number_format($guide->views) }} views</span>
                 </div>
 
-                <div class="mb-4">
-                    <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold">
-                        <i class="bi bi-credit-card me-1"></i>Pay for this Guide
-                    </a>
-                </div>
+                @if(!$hasFullAccess)
+                    <div class="mb-4">
+                        <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold">
+                            <i class="bi bi-credit-card me-1"></i>Unlock Full Guide
+                        </a>
+                    </div>
+                @endif
 
                 @if($guide->tags->count())
                     <div class="mb-4">
@@ -49,9 +51,24 @@
 
                 <hr style="border-color:#3d2e0f;">
 
-                <div class="guide-content mt-4" style="color:#e8d5b0;">
-                    {!! nl2br(e($guide->content)) !!}
-                </div>
+                @if($hasFullAccess)
+                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                        {!! nl2br(e($guide->content)) !!}
+                    </div>
+                @else
+                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                        {!! nl2br(e($previewContent)) !!}
+                    </div>
+                    <div class="alert mt-4" style="background:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
+                        <strong><i class="bi bi-lock-fill me-1"></i>Preview mode:</strong>
+                        You are viewing only the beginning of this guide. Complete payment to unlock the full content.
+                        <div class="mt-3">
+                            <a href="{{ route('guides.checkout', $guide->slug) }}" class="btn btn-gold btn-sm">
+                                <i class="bi bi-credit-card me-1"></i>Pay and Unlock
+                            </a>
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <div class="bg3-card p-4 p-md-5 mt-4">
