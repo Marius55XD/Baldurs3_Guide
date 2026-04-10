@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'BG3 Guide') — Baldur\'s Gate 3 Guide</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <title>@yield('title', 'BG3 Guide') — Baldur's Gate 3 Guide</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -37,7 +38,19 @@
             background-color: var(--bg3-darker) !important;
             border-bottom: 2px solid var(--bg3-gold);
         }
-        .navbar-brand { color: var(--bg3-gold) !important; font-weight: 700; font-size: 1.4rem; }
+        .navbar-brand {
+            color: var(--bg3-gold) !important;
+            font-weight: 700;
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-brand img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
         .nav-link { color: #d8ebff !important; }
         .nav-link:hover { color: var(--bg3-gold) !important; }
         .bg3-card {
@@ -151,7 +164,8 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-shield-fill-check me-2"></i>BG3 Guide
+                <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo">
+                <span>BG3 Guide</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <span class="navbar-toggler-icon"></span>

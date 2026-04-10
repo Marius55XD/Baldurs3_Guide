@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <title>Admin — @yield('title', 'Dashboard') | BG3 Guide</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -12,7 +13,20 @@
         body { background-color: #05121d; color: #d8ebff; }
         .sidebar { width: 240px; min-height: 100vh; background-color: var(--bg3-darker); border-right: 2px solid var(--bg3-border); position: fixed; top: 0; left: 0; z-index: 100; }
         .sidebar .brand { padding: 1.25rem; border-bottom: 1px solid var(--bg3-border); }
-        .sidebar .brand a { color: var(--bg3-gold); font-weight: 700; text-decoration: none; font-size: 1.2rem; }
+        .sidebar .brand a {
+            color: var(--bg3-gold);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .sidebar .brand img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
         .sidebar .nav-link { color: #a9c8e8; padding: .6rem 1.25rem; }
         .sidebar .nav-link:hover, .sidebar .nav-link.active { color: var(--bg3-gold); background-color: #10283b; }
         .sidebar .nav-link i { width: 1.4rem; }
@@ -75,7 +89,9 @@
 <body>
     <div class="sidebar d-flex flex-column">
         <div class="brand">
-            <a href="{{ route('admin.dashboard') }}"><i class="bi bi-shield-fill-check me-2"></i>BG3 Admin</a>
+            <a href="{{ route('admin.dashboard') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo">BG3 Admin
+            </a>
         </div>
         <nav class="mt-2 flex-grow-1">
             <a href="{{ route('admin.dashboard') }}" class="nav-link @if(request()->routeIs('admin.dashboard')) active @endif">

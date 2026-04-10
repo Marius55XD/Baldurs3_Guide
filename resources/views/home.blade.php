@@ -6,7 +6,7 @@
 <div class="hero-section">
     <div class="container text-center">
         <h1 class="display-4 fw-bold text-gold mb-3">
-            <i class="bi bi-shield-fill-check me-3"></i>Baldur's Gate 3 Guide
+            <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo" class="me-3" style="width: 80px; height: 80px; object-fit: contain;">Baldur's Gate 3 Guide
         </h1>
         <p class="lead mb-4" style="color:#d8ebff; max-width:600px; margin:0 auto 1.5rem;">
             The ultimate community hub for quests, character builds, strategies, and gameplay tips.
