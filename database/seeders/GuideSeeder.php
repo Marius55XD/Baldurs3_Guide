@@ -213,6 +213,31 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 'title'   => 'Essential Tips Every BG3 Player Should Know',
                 'content' => "Whether you're new to Baldur's Gate 3 or returning for another playthrough, these tips will save you time and frustration.\n\n1. Save Often\nUse the F5 quicksave constantly. The game's RPG systems mean you'll want to try different approaches.\n\n2. Shove is Incredibly Powerful\nShoving enemies off ledges is often the fastest way to deal with tough enemies. It's a bonus action, so you can still attack.\n\n3. Use the High Ground\nControl the high ground in combat for Advantage on ranged attacks. Position before the fight starts.\n\n4. Talk to Your Camp Companions\nCompanion approval unlocks powerful buffs and unique storylines. Rest regularly and speak to everyone.\n\n5. Examine Everything\nRight-click and examine enemies to learn their vulnerabilities. Switching damage types (fire vs cold) often makes a huge difference.\n\n6. Ritual Spells are Free\nSpells marked as 'Ritual' can be cast outside of combat without using a spell slot. Use Speak with Animals freely.\n\n7. Jump and Disengage\nYou can jump as a bonus action to avoid opportunity attacks. This is often better than the Disengage action.",
             ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Inventory and Economy Tips for Faster Progress',
+                'content' => "Managing loot and gold efficiently makes every act smoother and keeps your party geared without constant backtracking.\n\n1. Send Heavy Loot to Camp\nUse Send to Camp to avoid over-encumbrance while still keeping valuable gear.\n\n2. Sort by Type Before Selling\nGroup junk weapons, armor, and trinkets, then bulk-sell to save time in vendors.\n\n3. Keep Utility Consumables\nDo not sell all scrolls, arrows, and potions. Carry a tactical set for hard fights.\n\n4. Steal Smart, Not Reckless\nUse turn-based mode, line-of-sight checks, and quicksaves before risky pickpocket attempts.\n\n5. Buy Key Power Spikes\nPrioritize strong early upgrades like better bows, +1 weapons, and important scrolls for casters.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Combat Positioning Tips That Win Encounters',
+                'content' => "In BG3, positioning often matters more than raw stats. Better movement and setup can decide battles before round two.\n\n1. Open From Stealth\nStart encounters with your ranged or burst character to gain early tempo.\n\n2. Hold Choke Points\nFight in doorways and narrow paths to limit enemy numbers.\n\n3. Focus Fire Targets\nEliminate one dangerous enemy at a time instead of spreading damage.\n\n4. Use Vertical Advantage\nRanged attacks from high ground are more accurate and safer.\n\n5. Keep Backline Safe\nPlace casters and supports behind cover and frontliners to avoid sudden dives.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Party Setup Tips for Balanced Runs',
+                'content' => "A balanced party prevents wipe scenarios and gives you answers for dialogue, exploration, and combat in every zone.\n\n1. Cover Core Roles\nBring one frontliner, one healer or support, one caster, and one flexible damage dealer.\n\n2. Spread Skill Proficiencies\nEnsure your party can handle Persuasion, Sleight of Hand, Perception, and Arcana checks.\n\n3. Prepare for Rest Cycles\nUse short-rest classes and long-rest casters together so your team stays effective between camps.\n\n4. Build Redundancy\nHave at least two characters able to revive, heal, or crowd-control when things go wrong.\n\n5. Adjust Before Bosses\nSwap spells, elixirs, and gear for each major fight instead of using one setup for the whole act.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Dialogue and Skill Check Tips for Better Outcomes',
+                'content' => "Many of BG3's best rewards come from dialogue choices and skill checks, not just combat wins.\n\n1. Lead with High Charisma\nUse your best Persuasion, Deception, or Intimidation character to start key conversations.\n\n2. Keep Inspiration Ready\nSave Inspiration points for high-impact checks tied to companions, quests, or unique rewards.\n\n3. Use Guidance Constantly\nCast Guidance before social and utility checks whenever possible for easy value.\n\n4. Read NPC Reactions\nIf a conversation turns hostile, back out or change approach before locking into a bad path.\n\n5. Match Skills to Context\nSwap active speaker based on scene: Arcana for magic, Religion for cults, and Insight for suspicious NPCs.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Camp, Rest, and Buff Management Tips',
+                'content' => "Smart rest timing keeps your party strong and unlocks important story moments with companions.\n\n1. Long Rest Before Big Zones\nEnter major dungeons and boss areas with full spell slots and resources.\n\n2. Do Not Hoard Supplies Forever\nUse camp resources when needed; dead runs cost more than efficient resting.\n\n3. Apply Long-Duration Buffs Early\nCast enduring buffs and summon helpers before triggering long encounters.\n\n4. Check Camp Dialogue Often\nCompanion quests and approvals can advance only when you rest and talk in camp.\n\n5. Reconfigure Spells Between Days\nPrepare spells based on expected fights instead of keeping one static loadout all game.",
+            ],
         ];
 
         foreach ($guides as $data) {
