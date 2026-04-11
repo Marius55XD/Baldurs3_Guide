@@ -52,7 +52,12 @@
             object-fit: contain;
         }
         .nav-link { color: #d8ebff !important; }
-        .nav-link:hover { color: var(--bg3-gold) !important; }
+        .nav-link:not(.btn):hover { color: var(--bg3-gold) !important; }
+        .nav-link.btn,
+        .nav-link.btn:hover,
+        .nav-link.btn:focus {
+            color: var(--bg3-dark) !important;
+        }
         .navbar-profile-link {
             display: inline-flex;
             align-items: center;
