@@ -1,6 +1,31 @@
 ﻿@extends('layouts.app')
 @section('title', $guide->title)
 
+@push('styles')
+<style>
+    .guide-title {
+        font-size: clamp(2rem, 3.8vw, 2.8rem);
+        line-height: 1.15;
+    }
+    .guide-meta {
+        font-size: 1rem;
+    }
+    .guide-body {
+        font-size: 1.25rem;
+        line-height: 1.95;
+    }
+    .guide-faq-title {
+        font-size: 1.45rem;
+    }
+    #guideFaqAccordion .accordion-button {
+        font-size: 1.08rem;
+    }
+    .sidebar-card h6 {
+        font-size: 1.1rem;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container my-5">
     <div class="row g-4">
@@ -29,9 +54,9 @@
                         </span>
                     @endif
                 </div>
-                <h1 class="text-gold mb-3">{{ $guide->title }}</h1>
+                <h1 class="text-gold mb-3 guide-title">{{ $guide->title }}</h1>
 
-                <div class="d-flex gap-4 mb-4 small" style="color:#d8ebff;">
+                <div class="d-flex gap-4 mb-4 guide-meta" style="color:#d8ebff;">
                     <span><i class="bi bi-person me-1"></i>{{ $guide->author->name }}</span>
                     <span><i class="bi bi-calendar me-1"></i>{{ $guide->created_at->format('F d, Y') }}</span>
                     <span><i class="bi bi-arrow-clockwise me-1"></i>Updated {{ $guide->updated_at->diffForHumans() }}</span>
@@ -59,11 +84,11 @@
                 <hr style="border-color:#3d2e0f;">
 
                 @if($hasFullAccess)
-                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                    <div class="guide-content mt-4 guide-body" style="color:#ffffff;">
                         {!! nl2br(e($guide->content)) !!}
                     </div>
                 @else
-                    <div class="guide-content mt-4" style="color:#e8d5b0;">
+                    <div class="guide-content mt-4 guide-body" style="color:#ffffff;">
                         {!! nl2br(e($previewContent)) !!}
                     </div>
                     <div class="alert mt-4" style="background:#0f3137; border:1px solid #1f5a64; color:#8ee5f2;">
@@ -80,7 +105,7 @@
 
             @if($hasFullAccess)
                 <div class="bg3-card p-4 p-md-5 mt-4">
-                    <h4 class="text-gold mb-3"><i class="bi bi-question-circle me-2"></i>Guide FAQ</h4>
+                    <h4 class="text-gold mb-3 guide-faq-title"><i class="bi bi-question-circle me-2"></i>Guide FAQ</h4>
                     <div class="accordion" id="guideFaqAccordion">
                         <div class="accordion-item" style="background-color:#0f2a3e; border-color:#1e3a53;">
                             <h2 class="accordion-header" id="guideFaqOneHeader">
