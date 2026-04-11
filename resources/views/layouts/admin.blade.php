@@ -81,7 +81,42 @@
         .alert-danger  { background-color: #3a121f; border-color: #6b2b40; color: #f4a0b7; }
         .page-link { background-color: var(--bg3-card); border-color: var(--bg3-border); color: #d8ebff; }
         .page-link:hover { background-color: var(--bg3-gold); color: var(--bg3-dark); }
-        .page-item.active .page-link { background-color: var(--bg3-gold); border-color: var(--bg3-gold); color: var(--bg3-dark); }
+        .page-item.active .page-link {
+            background-color: var(--bg3-gold);
+            border-color: var(--bg3-gold);
+            color: #032033 !important;
+            font-weight: 700;
+        }
+        .admin-pagination .page-item.disabled .page-link {
+            color: #7fa2c4 !important;
+            background-color: #15364f;
+            border-color: #2a5877;
+            opacity: 1;
+        }
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child p,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child span,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child .text-muted,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child .small,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child .text-gray-700,
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child .dark\:text-gray-400 {
+            color: #d8ebff !important;
+        }
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.6rem;
+        }
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:first-child {
+            order: 2;
+        }
+        .admin-pagination nav .d-none.flex-sm-fill.d-sm-flex > div:last-child {
+            order: 1;
+        }
+        .admin-pagination nav .pagination,
+        .admin-pagination nav .small {
+            margin-bottom: 0;
+        }
         .text-gold { color: var(--bg3-gold) !important; }
         .badge-unread { background-color: #ef4444; color: white; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 999px; margin-left: 0.5rem; }
     </style>

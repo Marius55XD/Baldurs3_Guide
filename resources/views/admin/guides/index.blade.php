@@ -71,7 +71,7 @@
     </table>
 </div>
 
-<div class="mt-4 d-flex justify-content-center">
-    {{ $guides->links() }}
+<div class="mt-4 d-flex justify-content-center admin-pagination">
+    {{ $guides->links('pagination::bootstrap-5') }}
 </div>
 @endsection
