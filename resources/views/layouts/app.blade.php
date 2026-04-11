@@ -52,7 +52,12 @@
             object-fit: contain;
         }
         .nav-link { color: #d8ebff !important; }
-        .nav-link:hover { color: var(--bg3-gold) !important; }
+        .nav-link:not(.btn):hover { color: var(--bg3-gold) !important; }
+        .nav-link.btn,
+        .nav-link.btn:hover,
+        .nav-link.btn:focus {
+            color: var(--bg3-dark) !important;
+        }
         .navbar-profile-link {
             display: inline-flex;
             align-items: center;
@@ -65,6 +70,17 @@
             object-fit: cover;
             border: 1px solid rgba(103, 232, 249, 0.6);
             flex-shrink: 0;
+        }
+        .dropdown-menu {
+            --bs-dropdown-link-hover-bg: #123247;
+            --bs-dropdown-link-hover-color: #d8ebff;
+            --bs-dropdown-link-active-bg: #16435f;
+            --bs-dropdown-link-active-color: #d8ebff;
+        }
+        .dropdown-item:hover,
+        .dropdown-item:focus,
+        .dropdown-item:active {
+            color: #d8ebff !important;
         }
         .bg3-card {
             background-color: var(--bg3-card);

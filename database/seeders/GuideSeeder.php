@@ -14,6 +14,53 @@ class GuideSeeder extends Seeder
         $admin = User::where('email', 'admin@bg3guide.com')->first();
         if (!$admin) return;
 
+        $guideMetaByTitle = [
+            'Completing the Goblin Camp: Full Walkthrough' => [
+                'featured_image' => 'images/guides/guide_1_1775920868.jpg',
+                'views' => 3,
+            ],
+            'Sorcadin: Sorcerer/Paladin Multiclass Build Guide' => [
+                'featured_image' => 'images/guides/guide_2_1775863362.jpg',
+                'views' => 0,
+            ],
+            'How to Beat the Adamantine Forge Boss' => [
+                'featured_image' => 'images/guides/guide_3_1775863417.gif',
+                'views' => 0,
+            ],
+            'Essential Tips Every BG3 Player Should Know' => [
+                'featured_image' => 'images/guides/guide_4_1775921307.jpg',
+                'views' => 2,
+            ],
+            'Rescue the Druid Halsin: Grove Quest Guide' => [
+                'featured_image' => 'images/guides/guide_5_1775920841.jpg',
+                'views' => 7,
+            ],
+            'Save Mayrina: The Auntie Ethel Quest Walkthrough' => [
+                'featured_image' => 'images/guides/guide_6_1775920925.jpg',
+                'views' => 2,
+            ],
+            'The Githyanki Creche: Mountain Pass Quest Route' => [
+                'featured_image' => 'images/guides/guide_7_1775921025.jpg',
+                'views' => 1,
+            ],
+            'Break the Shadow Curse: Halsin’s Act 2 Quest' => [
+                'featured_image' => 'images/guides/guide_8_1775921101.jpg',
+                'views' => 1,
+            ],
+            'Find Ketheric’s Weakness: Moonrise Towers Infiltration' => [
+                'featured_image' => 'images/guides/guide_9_1775921144.jpg',
+                'views' => 1,
+            ],
+            'Steel Watch Shutdown: Gortash’s City Quest' => [
+                'featured_image' => 'images/guides/guide_10_1775921200.jpg',
+                'views' => 1,
+            ],
+            'Confront the Elder Brain: Final Act 3 Quest Guide' => [
+                'featured_image' => 'images/guides/guide_11_1775921244.jpg',
+                'views' => 2,
+            ],
+        ];
+
         $guides = [
             [
                 'category' => 'quests',
@@ -132,16 +179,34 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
             $category = Category::where('slug', $data['category'])->first();
             if (!$category) continue;
 
-            Guide::firstOrCreate(
+            $guide = Guide::firstOrCreate(
                 ['slug' => \Illuminate\Support\Str::slug($data['title'])],
                 [
                     'title'       => $data['title'],
                     'content'     => $data['content'],
+                    'excerpt'     => null,
                     'category_id' => $category->id,
                     'user_id'     => $admin->id,
                     'status'      => 'published',
+                    'featured_image' => $guideMetaByTitle[$data['title']]['featured_image'] ?? null,
+                    'views'          => $guideMetaByTitle[$data['title']]['views'] ?? 0,
                 ]
             );
+
+            // Keep existing guides in sync with imported SQL metadata/content.
+            $guide->fill([
+                'title'          => $data['title'],
+                'content'        => $data['content'],
+                'category_id'    => $category->id,
+                'user_id'        => $admin->id,
+                'status'         => 'published',
+                'featured_image' => $guideMetaByTitle[$data['title']]['featured_image'] ?? null,
+                'views'          => $guideMetaByTitle[$data['title']]['views'] ?? 0,
+            ]);
+
+            if ($guide->isDirty()) {
+                $guide->save();
+            }
         }
     }
 }
