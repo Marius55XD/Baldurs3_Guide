@@ -43,6 +43,8 @@ DB_PASSWORD=
 
 For real email delivery, set `MAIL_MAILER=smtp` and use Gmail with a Google App Password. The sender email must be a real Gmail mailbox you control; the password is the app password generated in your Google Account after enabling 2-Step Verification.
 
+Mail setup note: copy the values from `.env.example`, then replace the SMTP host, username, password, sender address, and `MAIL_CONTACT_TO` with your own working values. If you just want to test locally without sending real emails, set `MAIL_MAILER=log`.
+
 ### 4. Create the database in phpMyAdmin or run:
 `bash
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS bg3_guide CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"

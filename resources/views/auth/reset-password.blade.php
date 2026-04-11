@@ -1,5 +1,5 @@
-﻿@extends('layouts.app')
-@section('title', 'Login')
+@extends('layouts.app')
+@section('title', 'Reset Password')
 
 @section('content')
 @php
@@ -10,41 +10,45 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="bg3-card p-4 p-md-5 login-card">
-                <h2 class="text-gold mb-4 text-center"><i class="bi bi-door-open me-2"></i>Sign In</h2>
+                <h2 class="text-gold mb-3 text-center"><i class="bi bi-shield-lock me-2"></i>Set New Password</h2>
+                <p class="text-center mb-4" style="color:#d8ebff;">Choose a new password for your account.</p>
 
-                @if($errors->has('login') || $errors->has('email') || $errors->has('password'))
+                @if(session('error'))
                     <div class="alert alert-danger">
-                        <div>{{ $errors->first('login') ?: ($errors->first('email') ?: $errors->first('password')) }}</div>
+                        {{ session('error') }}
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}" novalidate>
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('password.update') }}" novalidate>
                     @csrf
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                               value="{{ old('email') }}" required autofocus>
+                               value="{{ old('email', $request->email) }}" required autofocus>
                         @error('email')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">New Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
                         @error('password')<div class="invalid-feedback auth-field-error">{{ $message }}</div>@enderror
                     </div>
-                    <div class="mb-4 form-check">
-                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                        <label class="form-check-label" for="remember" style="color:#d8ebff;">Remember me</label>
+                    <div class="mb-4">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" name="password_confirmation" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-gold w-100">Sign In</button>
+                    <button type="submit" class="btn btn-gold w-100">Reset Password</button>
                 </form>
-
-                <div class="text-center mt-3">
-                    <a href="{{ route('password.request') }}" class="text-gold text-decoration-none">Forgot your password?</a>
-                </div>
 
                 <hr style="border-color:#3d2e0f; margin:1.5rem 0;">
                 <p class="text-center mb-0" style="color:#d8ebff;">
-                    Don't have an account? <a href="{{ route('register') }}" class="text-gold">Register</a>
+                    <a href="{{ route('login') }}" class="text-gold">Back to Sign In</a>
                 </p>
             </div>
         </div>
@@ -77,4 +81,3 @@
     }
 </style>
 @endpush
-
