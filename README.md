@@ -46,17 +46,17 @@ DB_PASSWORD=
 
 For real email delivery, set `MAIL_MAILER=smtp` and use either Gmail (Google App Password) or Brevo SMTP.
 
-## Gmail option:
+#### Gmail option:
 - Sender email must be a real Gmail mailbox you control.
 - `MAIL_PASSWORD` must be the Google App Password generated after enabling 2-Step Verification.
 - Typical values: `MAIL_SCHEME=smtps`, `MAIL_HOST=smtp.gmail.com`, `MAIL_PORT=465`.
 
-## Brevo option (used in this project):
+#### Brevo option (used in this project):
 - Typical values: `MAIL_SCHEME=tls`, `MAIL_HOST=smtp-relay.brevo.com`, `MAIL_PORT=587`.
 - Use your Brevo SMTP login and key for `MAIL_USERNAME` and `MAIL_PASSWORD`.
 - `MAIL_FROM_ADDRESS` should be a sender address verified in Brevo.
 
-# Mail setup note: copy the values from `.env.example`, then replace SMTP host, username, password, sender address, and `MAIL_CONTACT_TO` with your own working values. For local testing without real delivery, set `MAIL_MAILER=log`.
+Mail setup note: copy the values from `.env.example`, then replace SMTP host, username, password, sender address, and `MAIL_CONTACT_TO` with your own working values. For local testing without real delivery, set `MAIL_MAILER=log`.
 
 ### 4. Create the database in phpMyAdmin or run:
 `bash
