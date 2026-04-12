@@ -122,6 +122,26 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 'content' => "The Grym fight at the Adamantine Forge is one of the most memorable boss encounters in Act 1.\n\nThe Mechanic\nGrym is almost invulnerable to conventional damage. You must use the Forge's lava vents and the central lava pool:\n1. Lure Grym onto the central platform\n2. Activate a lava vent to submerge it in lava (heating it up)\n3. Strike with the Forge Hammer while Grym is superheated\n\nPractical Steps\n- Split your party: one character operates the vents, another the hammer lever\n- Use movement abilities (Misty Step, Dash) to stay out of Grym's stomp range\n- A single hammer strike on a superheated Grym deals 60-100+ damage\n\nYou only need to use the hammer twice to defeat it on most difficulties.",
             ],
             [
+                'category' => 'strategies',
+                'title'   => 'Battlefield Positioning for Easy Wins',
+                'content' => "Positioning wins fights before the first round ends. Take high ground, hold choke points, and keep ranged characters behind cover so enemies are forced to approach on your terms.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Boss Fight Prep with Buffs and Potions',
+                'content' => "Enter tough encounters fully prepared. Cast long-duration buffs first, keep healing potions on every character, and save your strongest scrolls for the opening round.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Stealth Ambushes for Safer Encounters',
+                'content' => "Start from stealth whenever possible. A hidden opener lets you pick the first target, disrupt enemy formations, and control the fight before enemies react.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Surface Control: Fire, Ice, and Hazard Zones',
+                'content' => "Create hazardous terrain to slow, burn, or knock enemies down. Grease, ice, fire, and forced movement can be stronger than raw damage in many fights.",
+            ],
+            [
                 'category' => 'gameplay-tips',
                 'title'   => 'Essential Tips Every BG3 Player Should Know',
                 'content' => "Whether you're new to Baldur's Gate 3 or returning for another playthrough, these tips will save you time and frustration.\n\n1. Save Often\nUse the F5 quicksave constantly. The game's RPG systems mean you'll want to try different approaches.\n\n2. Shove is Incredibly Powerful\nShoving enemies off ledges is often the fastest way to deal with tough enemies. It's a bonus action, so you can still attack.\n\n3. Use the High Ground\nControl the high ground in combat for Advantage on ranged attacks. Position before the fight starts.\n\n4. Talk to Your Camp Companions\nCompanion approval unlocks powerful buffs and unique storylines. Rest regularly and speak to everyone.\n\n5. Examine Everything\nRight-click and examine enemies to learn their vulnerabilities. Switching damage types (fire vs cold) often makes a huge difference.\n\n6. Ritual Spells are Free\nSpells marked as 'Ritual' can be cast outside of combat without using a spell slot. Use Speak with Animals freely.\n\n7. Jump and Disengage\nYou can jump as a bonus action to avoid opportunity attacks. This is often better than the Disengage action.",
