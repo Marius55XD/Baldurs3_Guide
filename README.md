@@ -74,7 +74,7 @@ Seeds: 4 categories, 32 sample guides, admin user (admin@bg3guide.com / password
 `bash
 php artisan serve
 `
-Visit http://127.0.0.1:8000
+ Visit http://127.0.0.1:8000
 
 ---
 
