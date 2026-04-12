@@ -258,6 +258,26 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 'title'   => 'Camp, Rest, and Buff Management Tips',
                 'content' => "Smart rest timing keeps your party strong and unlocks important story moments with companions.\n\n1. Long Rest Before Big Zones\nEnter major dungeons and boss areas with full spell slots and resources.\n\n2. Do Not Hoard Supplies Forever\nUse camp resources when needed; dead runs cost more than efficient resting.\n\n3. Apply Long-Duration Buffs Early\nCast enduring buffs and summon helpers before triggering long encounters.\n\n4. Check Camp Dialogue Often\nCompanion quests and approvals can advance only when you rest and talk in camp.\n\n5. Reconfigure Spells Between Days\nPrepare spells based on expected fights instead of keeping one static loadout all game.",
             ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Quicksave Strategy for Risky Decisions',
+                'content' => "Quicksave does more than protect progress. Use it as a planning tool before major dialogue checks, trapped rooms, and high-risk steals so you can test different outcomes without replaying whole sections.\n\n1. Save Before Big Rolls\nCreate a save right before important Persuasion, Deception, or Intimidation checks.\n\n2. Save Before Unknown Combat\nIf you are entering a room with unclear threats, save before triggering the encounter.\n\n3. Use Distinct Manual Saves\nKeep named manual saves at chapter milestones in case you want to revisit earlier choices.\n\n4. Avoid Saving Mid-Disaster\nDo not spam saves while your party is wiped or trapped in a bad position.\n\n5. Rotate Save Slots\nUse multiple slots so one bad save state does not lock your run.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Vendor Routes and Shopping Priorities',
+                'content' => "Efficient shopping keeps your power curve high without wasting gold. Prioritize items that solve real combat problems instead of buying random upgrades.\n\n1. Buy Accuracy and Action Economy First\nWeapons with better hit chance and items that add bonus actions create the biggest impact.\n\n2. Stock Utility Consumables\nAlways carry lockpicks, healing potions, antidotes, and key scrolls.\n\n3. Check Vendors After Level Ups\nMerchants often refresh useful inventory as you progress.\n\n4. Sell in Bulk\nSort and sell junk items in one pass to avoid time loss in every town stop.\n\n5. Keep Emergency Gold\nDo not spend everything; reserve enough for surprise upgrades in the next area.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Stealth and Scouting Before Engagements',
+                'content' => "Scouting prevents bad openings. Send one stealth-capable character ahead to reveal enemy numbers, patrol paths, and environmental hazards before committing the full party.\n\n1. Split the Party for Recon\nDetach your scout to avoid pulling everyone into combat by mistake.\n\n2. Identify Priority Targets\nMark enemy casters, archers, and explosive objects before the first turn.\n\n3. Pre-Position the Team\nSet ranged allies on high ground and melee units near entry points.\n\n4. Open on Your Terms\nStart combat with a high-value first hit from stealth when possible.\n\n5. Retreat if Setup Fails\nIf you lose position, disengage and reset instead of forcing a bad fight.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Status Effects and Cleanse Timing',
+                'content' => "Many difficult encounters are decided by status control, not raw damage. Learn when to remove debuffs immediately and when to play through them for better action economy.\n\n1. Remove Crowd Control Fast\nBreak effects like Hold, Fear, and Sleep as early as possible.\n\n2. Respect Damage-Over-Time\nPoison, burn, and bleed can drain resources quickly in long fights.\n\n3. Carry Antidotes and Scrolls\nKeep cleanse options on multiple characters, not just one support.\n\n4. Use Resistance Pre-Fight\nApply elemental protections before entering known hazard areas.\n\n5. Focus Casters Applying Debuffs\nEliminating control-heavy enemies often stabilizes the entire fight.",
+            ],
         ];
 
         foreach ($guides as $data) {
