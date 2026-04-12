@@ -209,6 +209,26 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 'content' => "The Grym fight at the Adamantine Forge is one of the most memorable boss encounters in Act 1.\n\nThe Mechanic\nGrym is almost invulnerable to conventional damage. You must use the Forge's lava vents and the central lava pool:\n1. Lure Grym onto the central platform\n2. Activate a lava vent to submerge it in lava (heating it up)\n3. Strike with the Forge Hammer while Grym is superheated\n\nPractical Steps\n- Split your party: one character operates the vents, another the hammer lever\n- Use movement abilities (Misty Step, Dash) to stay out of Grym's stomp range\n- A single hammer strike on a superheated Grym deals 60-100+ damage\n\nYou only need to use the hammer twice to defeat it on most difficulties.",
             ],
             [
+                'category' => 'strategies',
+                'title'   => 'Battlefield Positioning for Easy Wins',
+                'content' => "Positioning wins fights before the first round ends. Take high ground, hold choke points, and keep ranged characters behind cover so enemies are forced to approach on your terms.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Boss Fight Prep with Buffs and Potions',
+                'content' => "Enter tough encounters fully prepared. Cast long-duration buffs first, keep healing potions on every character, and save your strongest scrolls for the opening round.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Stealth Ambushes for Safer Encounters',
+                'content' => "Start from stealth whenever possible. A hidden opener lets you pick the first target, disrupt enemy formations, and control the fight before enemies react.",
+            ],
+            [
+                'category' => 'strategies',
+                'title'   => 'Surface Control: Fire, Ice, and Hazard Zones',
+                'content' => "Create hazardous terrain to slow, burn, or knock enemies down. Grease, ice, fire, and forced movement can be stronger than raw damage in many fights.",
+            ],
+            [
                 'category' => 'gameplay-tips',
                 'title'   => 'Essential Tips Every BG3 Player Should Know',
                 'content' => "Whether you're new to Baldur's Gate 3 or returning for another playthrough, these tips will save you time and frustration.\n\n1. Save Often\nUse the F5 quicksave constantly. The game's RPG systems mean you'll want to try different approaches.\n\n2. Shove is Incredibly Powerful\nShoving enemies off ledges is often the fastest way to deal with tough enemies. It's a bonus action, so you can still attack.\n\n3. Use the High Ground\nControl the high ground in combat for Advantage on ranged attacks. Position before the fight starts.\n\n4. Talk to Your Camp Companions\nCompanion approval unlocks powerful buffs and unique storylines. Rest regularly and speak to everyone.\n\n5. Examine Everything\nRight-click and examine enemies to learn their vulnerabilities. Switching damage types (fire vs cold) often makes a huge difference.\n\n6. Ritual Spells are Free\nSpells marked as 'Ritual' can be cast outside of combat without using a spell slot. Use Speak with Animals freely.\n\n7. Jump and Disengage\nYou can jump as a bonus action to avoid opportunity attacks. This is often better than the Disengage action.",
@@ -237,6 +257,26 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 'category' => 'gameplay-tips',
                 'title'   => 'Camp, Rest, and Buff Management Tips',
                 'content' => "Smart rest timing keeps your party strong and unlocks important story moments with companions.\n\n1. Long Rest Before Big Zones\nEnter major dungeons and boss areas with full spell slots and resources.\n\n2. Do Not Hoard Supplies Forever\nUse camp resources when needed; dead runs cost more than efficient resting.\n\n3. Apply Long-Duration Buffs Early\nCast enduring buffs and summon helpers before triggering long encounters.\n\n4. Check Camp Dialogue Often\nCompanion quests and approvals can advance only when you rest and talk in camp.\n\n5. Reconfigure Spells Between Days\nPrepare spells based on expected fights instead of keeping one static loadout all game.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Quicksave Strategy for Risky Decisions',
+                'content' => "Quicksave does more than protect progress. Use it as a planning tool before major dialogue checks, trapped rooms, and high-risk steals so you can test different outcomes without replaying whole sections.\n\n1. Save Before Big Rolls\nCreate a save right before important Persuasion, Deception, or Intimidation checks.\n\n2. Save Before Unknown Combat\nIf you are entering a room with unclear threats, save before triggering the encounter.\n\n3. Use Distinct Manual Saves\nKeep named manual saves at chapter milestones in case you want to revisit earlier choices.\n\n4. Avoid Saving Mid-Disaster\nDo not spam saves while your party is wiped or trapped in a bad position.\n\n5. Rotate Save Slots\nUse multiple slots so one bad save state does not lock your run.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Vendor Routes and Shopping Priorities',
+                'content' => "Efficient shopping keeps your power curve high without wasting gold. Prioritize items that solve real combat problems instead of buying random upgrades.\n\n1. Buy Accuracy and Action Economy First\nWeapons with better hit chance and items that add bonus actions create the biggest impact.\n\n2. Stock Utility Consumables\nAlways carry lockpicks, healing potions, antidotes, and key scrolls.\n\n3. Check Vendors After Level Ups\nMerchants often refresh useful inventory as you progress.\n\n4. Sell in Bulk\nSort and sell junk items in one pass to avoid time loss in every town stop.\n\n5. Keep Emergency Gold\nDo not spend everything; reserve enough for surprise upgrades in the next area.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Stealth and Scouting Before Engagements',
+                'content' => "Scouting prevents bad openings. Send one stealth-capable character ahead to reveal enemy numbers, patrol paths, and environmental hazards before committing the full party.\n\n1. Split the Party for Recon\nDetach your scout to avoid pulling everyone into combat by mistake.\n\n2. Identify Priority Targets\nMark enemy casters, archers, and explosive objects before the first turn.\n\n3. Pre-Position the Team\nSet ranged allies on high ground and melee units near entry points.\n\n4. Open on Your Terms\nStart combat with a high-value first hit from stealth when possible.\n\n5. Retreat if Setup Fails\nIf you lose position, disengage and reset instead of forcing a bad fight.",
+            ],
+            [
+                'category' => 'gameplay-tips',
+                'title'   => 'Status Effects and Cleanse Timing',
+                'content' => "Many difficult encounters are decided by status control, not raw damage. Learn when to remove debuffs immediately and when to play through them for better action economy.\n\n1. Remove Crowd Control Fast\nBreak effects like Hold, Fear, and Sleep as early as possible.\n\n2. Respect Damage-Over-Time\nPoison, burn, and bleed can drain resources quickly in long fights.\n\n3. Carry Antidotes and Scrolls\nKeep cleanse options on multiple characters, not just one support.\n\n4. Use Resistance Pre-Fight\nApply elemental protections before entering known hazard areas.\n\n5. Focus Casters Applying Debuffs\nEliminating control-heavy enemies often stabilizes the entire fight.",
             ],
         ];
 
