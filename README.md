@@ -79,7 +79,7 @@ php artisan serve
 ---
 
 ## User Roles
-admin: full access | editor: create/edit/delete guides & categories | user: browse only
+admin: full access (users, roles, settings, all content) | editor: create/edit/delete guides & categories (no user/role management) | user: browse guides, purchase guides, and view own purchases
 
 Admin account: admin@bg3guide.com / password
 
