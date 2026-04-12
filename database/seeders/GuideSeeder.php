@@ -61,6 +61,26 @@ class GuideSeeder extends Seeder
             ],
         ];
 
+        $excerptByTitle = [
+            'Lockadin: Paladin/Warlock Multiclass Build Guide' => "Lockadin combines Paladin burst with Warlock short-rest spell slots, creating a very consistent smite machine from early game through level 12.\n\nCore Setup\n- Paladin 7 / Warlock 5\n- Oath of Vengeance...",
+            'Evocation Wizard Level 1-12 Build Guide' => "This build focuses on safe, high-damage AoE casting and strong late-game control. Evocation is perfect for players who want reliable spell damage without friendly-fire problems.\n\nCore Setup\n- Class: W...",
+            'Draconic Sorcerer Level 1-12 Build Guide' => "A pure Sorcerer build with strong burst, high mobility, and metamagic flexibility. Draconic Bloodline improves survivability while keeping top-tier spell damage.\n\nCore Setup\n- Class: Sorcerer (Draconi...",
+            'Oath of Vengeance Paladin Level 1-12 Build Guide' => "A frontline holy striker that excels at deleting priority targets with Divine Smite. This build is easy to pilot and strong in every act.\n\nCore Setup\n- Class: Paladin (Oath of Vengeance)\n- Key stats:...",
+            'Battle Master Fighter Level 1-12 Build Guide' => "Battle Master is a consistent martial powerhouse with strong control through maneuvers and excellent action economy.\n\nCore Setup\n- Class: Fighter (Battle Master)\n- Key stats: STR highest, then CON and...",
+            'Gloom Stalker Ranger Level 1-12 Build Guide' => "This stealth-focused ranged build shines in ambushes and opening rounds, with excellent initiative and first-turn burst.\n\nCore Setup\n- Class: Ranger (Gloom Stalker)\n- Key stats: DEX highest, then WIS...",
+            'Life Cleric Level 1-12 Build Guide' => "Life Cleric is the safest party backbone for Honour Mode and difficult fights, with powerful healing and strong utility.\n\nCore Setup\n- Class: Cleric (Life Domain)\n- Key stats: WIS highest, then CON an...",
+            'Thief Rogue Dual Crossbow Level 1-12 Build Guide' => "This Rogue build is a high-mobility damage dealer that abuses bonus actions and Sneak Attack consistency from ranged positioning.\n\nCore Setup\n- Class: Rogue (Thief)\n- Key stats: DEX highest, then CON...",
+            'Inventory and Economy Tips for Faster Progress' => "Managing loot and gold efficiently makes every act smoother and keeps your party geared without constant backtracking.\n\n1. Send Heavy Loot to Camp\nUse Send to Camp to avoid over-encumbrance while stil...",
+            'Combat Positioning Tips That Win Encounters' => "In BG3, positioning often matters more than raw stats. Better movement and setup can decide battles before round two.\n\n1. Open From Stealth\nStart encounters with your ranged or burst character to gain...",
+            'Party Setup Tips for Balanced Runs' => "A balanced party prevents wipe scenarios and gives you answers for dialogue, exploration, and combat in every zone.\n\n1. Cover Core Roles\nBring one frontliner, one healer or support, one caster, and on...",
+            'Dialogue and Skill Check Tips for Better Outcomes' => "Many of BG3's best rewards come from dialogue choices and skill checks, not just combat wins.\n\n1. Lead with High Charisma\nUse your best Persuasion, Deception, or Intimidation character to start key co...",
+            'Camp, Rest, and Buff Management Tips' => "Smart rest timing keeps your party strong and unlocks important story moments with companions.\n\n1. Long Rest Before Big Zones\nEnter major dungeons and boss areas with full spell slots and resources....",
+            'Quicksave Strategy for Risky Decisions' => "Quicksave does more than protect progress. Use it as a planning tool before major dialogue checks, trapped rooms, and high-risk steals so you can test different outcomes without replaying whole sectio...",
+            'Vendor Routes and Shopping Priorities' => "Efficient shopping keeps your power curve high without wasting gold. Prioritize items that solve real combat problems instead of buying random upgrades.\n\n1. Buy Accuracy and Action Economy First\nWeapo...",
+            'Stealth and Scouting Before Engagements' => "Scouting prevents bad openings. Send one stealth-capable character ahead to reveal enemy numbers, patrol paths, and environmental hazards before committing the full party.\n\n1. Split the Party for Reco...",
+            'Status Effects and Cleanse Timing' => "Many difficult encounters are decided by status control, not raw damage. Learn when to remove debuffs immediately and when to play through them for better action economy.\n\n1. Remove Crowd Control Fast...",
+        ];
+
         $guides = [
             [
                 'category' => 'quests',
@@ -289,7 +309,7 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
                 [
                     'title'       => $data['title'],
                     'content'     => $data['content'],
-                    'excerpt'     => null,
+                    'excerpt'     => $excerptByTitle[$data['title']] ?? null,
                     'category_id' => $category->id,
                     'user_id'     => $admin->id,
                     'status'      => 'published',
@@ -302,6 +322,7 @@ This quest decides the final outcome of the campaign and wraps up the entire sto
             $guide->fill([
                 'title'          => $data['title'],
                 'content'        => $data['content'],
+                'excerpt'        => $excerptByTitle[$data['title']] ?? null,
                 'category_id'    => $category->id,
                 'user_id'        => $admin->id,
                 'status'         => 'published',
