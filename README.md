@@ -2,7 +2,8 @@
 
 A centralised Laravel web platform for creating, organising, and accessing game guides for Baldur's Gate 3. Players can browse quests, character builds, strategies, and gameplay tips, while authorised editors and admins can manage all content.
 
-[▶ Watch Demo](./ezgif-5bf4a47ca7d78bf3.mp4)
+
+https://github.com/user-attachments/assets/39c49e94-c3d2-403c-ae99-8ecc462097c9
 
 ---
 
