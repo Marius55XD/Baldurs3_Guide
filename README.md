@@ -58,18 +58,18 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS bg3_guide CHARACTER SET utf8mb4 
 php artisan migrate --seed
 `
 
-Seeds: 4 categories, 4 sample guides, admin user (admin@bg3guide.com / password).
+Seeds: 4 categories, 32 sample guides, admin user (admin@bg3guide.com / password).
 
 ### 6. Start the server
 `bash
 php artisan serve
 `
-Visit http://localhost:8000
+Visit http://127.0.0.1:8000
 
 ---
 
 ## User Roles
-admin: full access | editor: create/edit guides & categories | user: browse only
+admin: full access | editor: create/edit/delete guides & categories | user: browse only
 
 Admin account: admin@bg3guide.com / password
 
