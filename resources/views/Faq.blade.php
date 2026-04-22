@@ -6,6 +6,19 @@
     .faq-shell {
         padding: 1.5rem 0 2.5rem;
     }
+    @media (max-width: 991.98px) {
+        .faq-shell {
+            padding-left: 0.95rem;
+            padding-right: 0.95rem;
+        }
+    }
+    @media (max-width: 575.98px) {
+        .faq-shell {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 1.25rem;
+        }
+    }
     .support-side-title {
         color: var(--bg3-gold);
         font-weight: 700;

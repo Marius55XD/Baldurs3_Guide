@@ -6,6 +6,19 @@
 	.about-shell {
 		padding: 2rem 0 3rem;
 	}
+	@media (max-width: 991.98px) {
+		.about-shell {
+			padding-left: 0.95rem;
+			padding-right: 0.95rem;
+		}
+	}
+	@media (max-width: 575.98px) {
+		.about-shell {
+			padding-left: 1rem;
+			padding-right: 1rem;
+			padding-top: 1.35rem;
+		}
+	}
 	.about-sidebar {
 		position: sticky;
 		top: 1rem;

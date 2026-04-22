@@ -119,6 +119,58 @@
         }
         .text-gold { color: var(--bg3-gold) !important; }
         .badge-unread { background-color: #ef4444; color: white; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 999px; margin-left: 0.5rem; }
+        @media (max-width: 991.98px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--bg3-border);
+            }
+            .admin-layout-content {
+                margin-left: 0 !important;
+            }
+            .admin-topbar,
+            .main-content {
+                margin-left: 0;
+            }
+            .admin-topbar {
+                padding: .75rem 1rem;
+                flex-wrap: wrap;
+                gap: .5rem;
+            }
+            .main-content {
+                padding: 1.25rem 1rem;
+            }
+            .sidebar .brand,
+            .sidebar .nav-link {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        @media (max-width: 575.98px) {
+            .container,
+            .container-sm,
+            .container-md,
+            .container-lg,
+            .container-xl,
+            .container-xxl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .admin-topbar {
+                padding: .7rem .9rem;
+            }
+            .main-content {
+                padding: 1rem .9rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+            .stat-card .stat-value {
+                font-size: 1.7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -157,11 +209,11 @@
         </div>
     </div>
 
-    <div style="margin-left:240px;">
+    <div class="admin-layout-content" style="margin-left:240px;">
         <div class="admin-topbar d-flex align-items-center" style="margin-left:0;">
             <h5 class="mb-0 text-gold">@yield('title', 'Dashboard')</h5>
             @if(session('success'))
-                <div class="alert alert-success py-1 px-3 mb-0 ms-3">
+                <div class="alert alert-success py-1 px-3 mb-0 ms-md-3">
                     <i class="bi bi-check-circle me-1"></i>{{ session('success') }}
                 </div>
             @endif

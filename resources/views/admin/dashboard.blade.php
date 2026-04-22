@@ -1,6 +1,22 @@
 ﻿@extends('layouts.admin')
 @section('title', 'Dashboard')
 
+@push('styles')
+<style>
+    .admin-dashboard-table-wrap {
+        overflow-x: auto;
+    }
+    .admin-dashboard-table-wrap table {
+        min-width: 560px;
+    }
+    @media (max-width: 575.98px) {
+        .admin-dashboard-header {
+            gap: .6rem;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="row g-4 mb-5">
     <div class="col-md-2 col-sm-4 col-6">
@@ -44,40 +60,42 @@
 <div class="row g-4">
     <div class="col-md-8">
         <div class="bg3-card p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap admin-dashboard-header mb-3">
                 <h5 class="text-gold mb-0">Recent Guides</h5>
                 <a href="{{ route('admin.guides.create') }}" class="btn btn-gold btn-sm">
                     <i class="bi bi-plus me-1"></i>New Guide
                 </a>
             </div>
-            <table class="table table-dark-bg table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($recentGuides as $guide)
-                    <tr>
-                        <td>
-                            <a href="{{ route('admin.guides.edit', $guide) }}" class="text-gold text-decoration-none">
-                                {{ Str::limit($guide->title, 45) }}
-                            </a>
-                        </td>
-                        <td><small>{{ $guide->category->name }}</small></td>
-                        <td>
-                            <span class="badge {{ $guide->status === 'published' ? 'bg-success' : 'bg-secondary' }}">
-                                {{ ucfirst($guide->status) }}
-                            </span>
-                        </td>
-                        <td><small>{{ $guide->created_at->format('M d') }}</small></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="admin-dashboard-table-wrap">
+                <table class="table table-dark-bg table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($recentGuides as $guide)
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.guides.edit', $guide) }}" class="text-gold text-decoration-none">
+                                    {{ Str::limit($guide->title, 45) }}
+                                </a>
+                            </td>
+                            <td><small>{{ $guide->category->name }}</small></td>
+                            <td>
+                                <span class="badge {{ $guide->status === 'published' ? 'bg-success' : 'bg-secondary' }}">
+                                    {{ ucfirst($guide->status) }}
+                                </span>
+                            </td>
+                            <td><small>{{ $guide->created_at->format('M d') }}</small></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <a href="{{ route('admin.guides.index') }}" class="btn btn-outline-secondary btn-sm">View All Guides</a>
         </div>
     </div>

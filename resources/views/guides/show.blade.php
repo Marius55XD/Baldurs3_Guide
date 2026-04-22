@@ -3,6 +3,36 @@
 
 @push('styles')
 <style>
+    .guide-breadcrumb-wrap {
+        background: linear-gradient(180deg, rgba(11, 34, 51, 0.78) 0%, rgba(8, 25, 38, 0.92) 100%);
+        border: 1px solid var(--bg3-border);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+    }
+    .guide-breadcrumb {
+        --bs-breadcrumb-divider: '›';
+        margin-bottom: 0;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: .3rem;
+    }
+    .guide-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+        color: #4d6f8f;
+        padding-right: .55rem;
+    }
+    .guide-breadcrumb .breadcrumb-item {
+        font-size: .98rem;
+        line-height: 1.35;
+        word-break: break-word;
+    }
+    .guide-breadcrumb .breadcrumb-item a {
+        color: var(--bg3-gold);
+        text-underline-offset: 2px;
+    }
+    .guide-breadcrumb .breadcrumb-item.active {
+        color: #d8ebff;
+        font-weight: 600;
+    }
     .guide-title {
         font-size: clamp(2rem, 3.8vw, 2.8rem);
         line-height: 1.15;
@@ -23,6 +53,14 @@
     .sidebar-card h6 {
         font-size: 1.1rem;
     }
+    @media (max-width: 575.98px) {
+        .guide-breadcrumb-wrap {
+            padding: .65rem .85rem;
+        }
+        .guide-breadcrumb .breadcrumb-item {
+            font-size: .92rem;
+        }
+    }
 </style>
 @endpush
 
@@ -32,12 +70,14 @@
         {{-- Main Content --}}
         <div class="col-md-8">
             <nav aria-label="breadcrumb" class="mb-3">
-                <ol class="breadcrumb" style="background:transparent;">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-gold">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('guides.index') }}" class="text-gold">Guides</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('guides.index', ['category' => $guide->category->slug]) }}" class="text-gold">{{ $guide->category->name }}</a></li>
-                    <li class="breadcrumb-item active" style="color:#d8ebff;">{{ Str::limit($guide->title, 40) }}</li>
-                </ol>
+                <div class="guide-breadcrumb-wrap">
+                    <ol class="breadcrumb guide-breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('guides.index') }}">Guides</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('guides.index', ['category' => $guide->category->slug]) }}">{{ $guide->category->name }}</a></li>
+                        <li class="breadcrumb-item active">{{ Str::limit($guide->title, 55) }}</li>
+                    </ol>
+                </div>
             </nav>
 
             <div class="bg3-card p-4 p-md-5">
@@ -56,7 +96,7 @@
                 </div>
                 <h1 class="text-gold mb-3 guide-title">{{ $guide->title }}</h1>
 
-                <div class="d-flex gap-4 mb-4 guide-meta" style="color:#d8ebff;">
+                <div class="d-flex flex-wrap gap-3 mb-4 guide-meta" style="color:#d8ebff;">
                     <span><i class="bi bi-person me-1"></i>{{ $guide->author->name }}</span>
                     <span><i class="bi bi-calendar me-1"></i>{{ $guide->created_at->format('F d, Y') }}</span>
                     <span><i class="bi bi-arrow-clockwise me-1"></i>Updated {{ $guide->updated_at->diffForHumans() }}</span>

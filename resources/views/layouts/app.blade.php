@@ -38,6 +38,21 @@
             background-color: var(--bg3-darker) !important;
             border-bottom: 2px solid var(--bg3-gold);
         }
+        .navbar-toggler {
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+        .navbar-toggler:hover,
+        .navbar-toggler:focus {
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+        .navbar-toggler-icon {
+            filter: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C 255%2C 255%2C 0.98%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.6' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
         .navbar-brand {
             color: var(--bg3-gold) !important;
             font-weight: 700;
@@ -190,11 +205,80 @@
         .table-dark-bg td { border-color: var(--bg3-border); }
         .alert-success { background-color: #0f3137; border-color: #1f5a64; color: #8ee5f2; }
         .alert-danger  { background-color: #3a121f; border-color: #6b2b40; color: #f4a0b7; }
+        @media (max-width: 991.98px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .navbar-collapse {
+                padding-top: .5rem;
+                padding-bottom: .35rem;
+            }
+            .navbar .navbar-nav {
+                gap: .15rem;
+            }
+            .navbar .nav-link {
+                padding-top: .45rem;
+                padding-bottom: .45rem;
+            }
+            .navbar-guest-login {
+                display: flex;
+                justify-content: center;
+            }
+            .navbar-guest-login .nav-link {
+                text-align: center;
+            }
+            .navbar-search-form {
+                width: 100%;
+                margin: .65rem 0 !important;
+            }
+            .navbar-search-form .form-control {
+                min-width: 0;
+            }
+            .navbar-profile-link span {
+                max-width: 140px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: inline-block;
+            }
+            .hero-section {
+                padding: 56px 0;
+            }
+            .home-hero-logo {
+                width: 58px !important;
+                height: 58px !important;
+            }
+            .home-hero-title {
+                font-size: clamp(1.7rem, 8vw, 2.2rem);
+            }
+            .hero-cta-btn {
+                width: 100%;
+            }
+        }
+        @media (max-width: 575.98px) {
+            .container,
+            .container-sm,
+            .container-md,
+            .container-lg,
+            .container-xl,
+            .container-xxl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .hero-section {
+                padding: 44px 0;
+            }
+        }
+        @media (min-width: 576px) {
+            .hero-cta-btn {
+                width: auto;
+            }
+        }
     </style>
     @stack('styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo">
@@ -221,7 +305,7 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex me-3" action="{{ route('guides.index') }}" method="GET">
+                <form class="d-flex me-3 navbar-search-form" action="{{ route('guides.index') }}" method="GET">
                     <input class="form-control form-control-sm me-2" type="search" name="search"
                            placeholder="Search guides..." value="{{ request('search') }}">
                     <button class="btn btn-gold btn-sm" type="submit"><i class="bi bi-search"></i></button>
@@ -270,7 +354,7 @@
                             </ul>
                         </li>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item navbar-guest-login"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                         <li class="nav-item"><a class="nav-link btn btn-gold btn-sm ms-2 px-3" href="{{ route('register') }}">Register</a></li>
                     @endauth
                 </ul>
