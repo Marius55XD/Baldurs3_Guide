@@ -10,18 +10,18 @@
 
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
                     <div>
-                        <div class="small" style="color:#d8ebff;">You are purchasing access to:</div>
+                        <div class="small" style="color:#ffffff;">You are purchasing access to:</div>
                         <h4 class="text-gold mb-1">{{ $guide->title }}</h4>
-                        <small style="color:#d8ebff;">Category: {{ $guide->category->name }}</small>
+                        <small style="color:#ffffff;">Category: {{ $guide->category->name }}</small>
                     </div>
                     <div class="text-md-end">
-                        <div class="small" style="color:#d8ebff;">Total</div>
+                        <div class="small" style="color:#ffffff;">Total</div>
                         <div class="text-gold" style="font-size:1.8rem; font-weight:700;">EUR {{ number_format($price, 2) }}</div>
                     </div>
                 </div>
 
-                <p class="mb-4" style="color:#d8ebff;">
-                    This is a demo checkout flow. A payment gateway can be integrated later.
+                <p class="mb-4" style="color:#ffffff;">
+                    Complete your payment with PayPal to unlock the full guide.
                 </p>
 
                 @auth
@@ -33,13 +33,19 @@
                             <i class="bi bi-journal-text me-1"></i>Read Full Guide
                         </a>
                     @else
-                        <form id="checkoutPayForm" method="POST" action="{{ route('guides.checkout.pay', $guide->slug) }}">
-                            @csrf
-                            <button type="button" class="btn btn-gold js-confirm-pay-submit" data-guide-title="{{ $guide->title }}" data-pay-amount="EUR {{ number_format($price, 2) }}">
-                                <i class="bi bi-lock-fill me-1"></i>Pay EUR {{ number_format($price, 2) }}
-                            </button>
-                            <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary ms-2">Cancel</a>
-                        </form>
+                        @if($paypalEnabled)
+                            <div class="alert mb-3" style="background:#0f3137; border:1px solid #1f5a64; color:#ffffff;">
+                                Complete your purchase with PayPal to unlock the full guide.
+                            </div>
+                            <div id="paypal-button-container" class="mb-3"></div>
+                            <div id="paypal-status-message" class="small mb-3" style="color:#ffffff;"></div>
+                            <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary">Cancel</a>
+                        @else
+                            <div class="alert mb-3" style="background:#3a121f; border:1px solid #6b2b40; color:#ffffff;">
+                                PayPal is not configured yet. Add the PayPal credentials in your environment file to enable checkout.
+                            </div>
+                            <a href="{{ route('guides.show', $guide->slug) }}" class="btn btn-outline-secondary">Cancel</a>
+                        @endif
                     @endif
                 @else
                     <a href="{{ route('login') }}" class="btn btn-gold">
@@ -52,54 +58,115 @@
     </div>
 </div>
 
-<div class="modal fade" id="checkoutConfirmModal" tabindex="-1" aria-labelledby="checkoutConfirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background-color:#0b2233; border:1px solid #1e3a53; color:#d8ebff;">
-            <div class="modal-header" style="border-color:#1e3a53;">
-                <h5 class="modal-title text-gold" id="checkoutConfirmModalLabel">Confirm Payment</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-2">Are you sure you want to pay <strong id="checkoutConfirmAmount">EUR {{ number_format($price, 2) }}</strong> for:</p>
-                <p class="mb-0"><strong id="checkoutConfirmTitle">{{ $guide->title }}</strong>?</p>
-                <p class="small mb-0 mt-2" style="color:#8fb3d9;">
-                    Selecting "Yes, Pay Now" confirms this payment action.
-                </p>
-            </div>
-            <div class="modal-footer" style="border-color:#1e3a53;">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" id="checkoutConfirmSubmit" class="btn btn-gold">Yes, Pay Now</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
+@if($paypalEnabled)
+<script src="https://www.paypal.com/sdk/js?client-id={{ rawurlencode($paypalClientId) }}&currency={{ rawurlencode($paypalCurrency) }}&intent=capture&disable-funding=card"></script>
+@endif
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const button = document.querySelector('.js-confirm-pay-submit');
-        const form = document.getElementById('checkoutPayForm');
-        const modalElement = document.getElementById('checkoutConfirmModal');
+        const paypalEnabled = @json($paypalEnabled);
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        const paypalContainer = document.getElementById('paypal-button-container');
+        const statusMessage = document.getElementById('paypal-status-message');
+        const orderUrl = @json(route('guides.checkout.paypal.order', $guide->slug));
+        const captureUrl = @json(route('guides.checkout.paypal.capture', $guide->slug));
 
-        if (!button || !form || !modalElement || typeof bootstrap === 'undefined') {
+        const showStatus = function (message, type) {
+            if (!statusMessage) {
+                return;
+            }
+
+            statusMessage.className = 'small mb-3 alert alert-' + (type || 'info');
+            statusMessage.textContent = message;
+        };
+
+        if (paypalEnabled) {
+            if (!paypalContainer || typeof paypal === 'undefined') {
+                showStatus('PayPal failed to load. Refresh the page and try again.', 'danger');
+                return;
+            }
+
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder: async function () {
+                    showStatus('Opening PayPal checkout...', 'info');
+
+                    const response = await fetch(orderUrl, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({}),
+                    });
+
+                    const payload = await response.json().catch(function () {
+                        return {};
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 409 && payload.redirectUrl) {
+                            window.location.href = payload.redirectUrl;
+                            return null;
+                        }
+
+                        throw new Error(payload.message || 'Could not initialize PayPal checkout.');
+                    }
+
+                    return payload.id;
+                },
+                onApprove: async function (data) {
+                    showStatus('Completing your payment...', 'info');
+
+                    const response = await fetch(captureUrl, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                        }),
+                    });
+
+                    const payload = await response.json().catch(function () {
+                        return {};
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(payload.message || 'PayPal could not capture this payment.');
+                    }
+
+                    if (payload.message) {
+                        showStatus(payload.message, 'success');
+                    }
+
+                    if (payload.redirectUrl) {
+                        window.location.href = payload.redirectUrl;
+                    }
+                },
+                onCancel: function () {
+                    showStatus('PayPal checkout was cancelled.', 'warning');
+                },
+                onError: function (error) {
+                    showStatus(error?.message || 'PayPal checkout failed. Please try again.', 'danger');
+                }
+            }).render(paypalContainer).catch(function () {
+                showStatus('PayPal checkout could not be rendered. Please refresh and try again.', 'danger');
+            });
             return;
         }
-
-        const modal = new bootstrap.Modal(modalElement);
-        const confirmBtn = document.getElementById('checkoutConfirmSubmit');
-        const titleEl = document.getElementById('checkoutConfirmTitle');
-        const amountEl = document.getElementById('checkoutConfirmAmount');
-
-        button.addEventListener('click', function () {
-            titleEl.textContent = button.dataset.guideTitle || '{{ $guide->title }}';
-            amountEl.textContent = button.dataset.payAmount || 'EUR {{ number_format($price, 2) }}';
-            modal.show();
-        });
-
-        confirmBtn.addEventListener('click', function () {
-            form.submit();
-        });
     });
 </script>
 @endpush

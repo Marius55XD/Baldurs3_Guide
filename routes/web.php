@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GuideController as AdminGuideController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -88,6 +89,7 @@ Route::middleware('auth')->group(function () {
 // ── Admin ─────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('payments.index');
 
     Route::resource('guides',     AdminGuideController::class);
     Route::resource('categories', AdminCategoryController::class);

@@ -53,6 +53,7 @@ class GuidePaymentController extends Controller
         if ($this->userHasAccess($user, $guide)) {
             return response()->json([
                 'message' => 'You already have full access to this guide.',
+                'redirectUrl' => route('guides.show', $guide->slug),
             ], 409);
         }
 
@@ -123,6 +124,7 @@ class GuidePaymentController extends Controller
 
             $response = Http::withToken($accessToken)
                 ->acceptJson()
+                ->withBody('{}', 'application/json')
                 ->post($this->getPayPalBaseUrl() . '/v2/checkout/orders/' . $validated['orderID'] . '/capture');
 
             if (!$response->successful()) {

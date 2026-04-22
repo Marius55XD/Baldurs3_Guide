@@ -190,6 +190,9 @@
             <a href="{{ route('admin.categories.index') }}" class="nav-link @if(request()->routeIs('admin.categories.*')) active @endif">
                 <i class="bi bi-tags"></i> Categories
             </a>
+            <a href="{{ route('admin.payments.index') }}" class="nav-link @if(request()->routeIs('admin.payments.*')) active @endif">
+                <i class="bi bi-credit-card"></i> Payments
+            </a>
             <a href="{{ route('admin.contact-messages.index') }}" class="nav-link @if(request()->routeIs('admin.contact-messages.*')) active @endif">
                 <i class="bi bi-chat-left-text"></i> Contact Messages
                 @php $unreadCount = \App\Models\ContactMessage::whereNull('read_at')->count(); @endphp
