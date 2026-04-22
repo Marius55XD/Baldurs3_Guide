@@ -43,7 +43,7 @@
 
         {{-- Guide Grid --}}
         <div class="col-md-9">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
                 <h2 class="text-gold mb-0">
                     <i class="bi bi-book me-2"></i>
                     @if(request('category'))

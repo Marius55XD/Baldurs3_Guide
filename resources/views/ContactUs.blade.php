@@ -33,6 +33,19 @@
 		font-weight: 600;
 		margin-bottom: 0.35rem;
 	}
+	@media (max-width: 991.98px) {
+		.contact-shell {
+			padding-left: 0.85rem;
+			padding-right: 0.85rem;
+		}
+	}
+	@media (max-width: 575.98px) {
+		.contact-shell {
+			padding-left: 1rem;
+			padding-right: 1rem;
+			padding-top: 1.25rem;
+		}
+	}
 </style>
 @endpush
 

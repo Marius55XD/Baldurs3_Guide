@@ -5,18 +5,18 @@
 {{-- Hero --}}
 <div class="hero-section">
     <div class="container text-center">
-        <h1 class="display-4 fw-bold text-gold mb-3">
-            <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo" class="me-3" style="width: 80px; height: 80px; object-fit: contain;">Baldur's Gate 3 Guide
+        <h1 class="display-4 fw-bold text-gold mb-3 home-hero-title">
+            <img src="{{ asset('images/logo.png') }}" alt="Baldur's Gate 3 logo" class="me-3 home-hero-logo" style="width: 80px; height: 80px; object-fit: contain;">Baldur's Gate 3 Guide
         </h1>
         <p class="lead mb-4" style="color:#d8ebff; max-width:600px; margin:0 auto 1.5rem;">
             The ultimate community hub for quests, character builds, strategies, and gameplay tips.
         </p>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{{ route('guides.index') }}" class="btn btn-gold btn-lg px-5">
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+            <a href="{{ route('guides.index') }}" class="btn btn-gold btn-lg px-5 hero-cta-btn">
                 <i class="bi bi-book me-2"></i>Browse Guides
             </a>
             @guest
-                <a href="{{ route('register') }}" class="btn btn-outline-gold btn-lg px-5">
+                <a href="{{ route('register') }}" class="btn btn-outline-gold btn-lg px-5 hero-cta-btn">
                     <i class="bi bi-person-plus me-2"></i>Join Community
                 </a>
             @endguest
