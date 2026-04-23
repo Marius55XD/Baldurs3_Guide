@@ -33,6 +33,8 @@ Route::get('/guides/{slug}/checkout', [GuidePaymentController::class, 'show'])->
 Route::post('/guides/{slug}/checkout', [GuidePaymentController::class, 'pay'])->name('guides.checkout.pay')->middleware('auth');
 Route::post('/guides/{slug}/checkout/paypal/order', [GuidePaymentController::class, 'createPayPalOrder'])->name('guides.checkout.paypal.order')->middleware('auth');
 Route::post('/guides/{slug}/checkout/paypal/capture', [GuidePaymentController::class, 'capturePayPalOrder'])->name('guides.checkout.paypal.capture')->middleware('auth');
+Route::post('/guides/{slug}/checkout/stripe/session', [GuidePaymentController::class, 'createStripeSession'])->name('guides.checkout.stripe.session')->middleware('auth');
+Route::get('/guides/{slug}/checkout/stripe/success', [GuidePaymentController::class, 'stripeSuccess'])->name('guides.checkout.stripe.success')->middleware('auth');
 
 // ── Auth ──────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {

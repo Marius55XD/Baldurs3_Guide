@@ -41,4 +41,10 @@ return [
         'base_url' => env('PAYPAL_BASE_URL', 'https://api-m.sandbox.paypal.com'),
     ],
 
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+        'publishable_key' => env('STRIPE_PUBLISHABLE_KEY'),
+        'base_url' => env('STRIPE_BASE_URL', 'https://api.stripe.com'),
+    ],
+
 ];
