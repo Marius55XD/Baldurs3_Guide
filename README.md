@@ -87,3 +87,11 @@ Admin account: admin@bg3guide.com / password
 
 ## Technologies
 - Laravel 11 | MySQL (XAMPP) | Bootstrap 5 CDN | Bootstrap Icons | Eloquent ORM | Blade
+
+
+## About Us
+### Marius Stuopelis
+### Bio:
+2nd Year student studying a Bachelor (Hons) in Computing in Software Development at Dundalk Institute of Technology. I’ve built a solid foundation in programming and problem-solving through my coursework and projects. I also have experience in fast-paced, customer-facing roles, where I’ve developed strong communication and teamwork skills. In my free time, I enjoy working out and hanging out with friends. I’m aiming to become a software engineer in the future.
+
+<a href="www.linkedin.com/in/marius-stuopelis-74477317a">LinkedIn</a>
