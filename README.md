@@ -95,3 +95,9 @@ Admin account: admin@bg3guide.com / password
 2nd Year student studying a Bachelor (Hons) in Computing in Software Development at Dundalk Institute of Technology. I’ve built a solid foundation in programming and problem-solving through my coursework and projects. I also have experience in fast-paced, customer-facing roles, where I’ve developed strong communication and teamwork skills. In my free time, I enjoy working out and hanging out with friends. I’m aiming to become a software engineer in the future.
 
 <a href="https://www.linkedin.com/in/marius-stuopelis-74477317a/">LinkedIn</a>
+
+### Gvidonas Buikys 
+### BIO 
+Second-year Software Development (Level 8 Honours Bachelors) student. I have developed a solid foundation in programming, problem-solving, and software development through academic coursework and projects using technologies such as e.g. Java, JavaScript, SQL, React, HTML, Swift. I am a motivated and detail oriented individual with a strong sense of teamwork and communication skills demonstrated through group projects.  
+
+< a href="https://www.linkedin.com/in/gvidonas-buikys-1bb7283b3/">LinkedIn</a>
