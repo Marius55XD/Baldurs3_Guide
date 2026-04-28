@@ -100,4 +100,4 @@ Admin account: admin@bg3guide.com / password
 ### BIO 
 Second-year Software Development (Level 8 Honours Bachelors) student. I have developed a solid foundation in programming, problem-solving, and software development through academic coursework and projects using technologies such as e.g. Java, JavaScript, SQL, React, HTML, Swift. I am a motivated and detail oriented individual with a strong sense of teamwork and communication skills demonstrated through group projects.  
 
-< a href="https://www.linkedin.com/in/gvidonas-buikys-1bb7283b3/">LinkedIn</a>
+<a href="https://www.linkedin.com/in/gvidonas-buikys-1bb7283b3/">LinkedIn</a>
